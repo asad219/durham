@@ -1,0 +1,24 @@
+# Durham Islamic Centre - Clean URLs (serve .html pages without the extension)
+
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Redirect: if someone requests /page.html, send them to /page (canonical, no extension)
+  RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # Don't rewrite existing files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Internally rewrite /page to /page.html if it exists
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*?)/?$ $1.html [L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
