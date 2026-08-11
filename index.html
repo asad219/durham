@@ -100,10 +100,6 @@
   .mobile-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
   .mobile-drawer.open { transform: translateX(0); }
 
-  .arch-card {
-    clip-path: polygon(0 12%, 8% 0, 92% 0, 100% 12%, 100% 100%, 0 100%);
-  }
-
   .frame-gold {
     box-shadow:
       0 0 0 1px rgba(152,33,28,.45),
@@ -113,6 +109,132 @@
 
   .gallery-tile img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
   .gallery-tile:hover img { transform: scale(1.08); }
+  .gallery-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(18,3,3,.55));
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+  }
+  .gallery-tile:hover::after { opacity: 1; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 1rem 1.5rem;
+    background: rgba(18, 3, 3, .9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s ease, visibility .4s ease;
+  }
+  .lightbox.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .lightbox-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow:
+      0 0 0 1px rgba(223,187,184,.35),
+      0 28px 80px rgba(0,0,0,.5);
+    max-width: min(1100px, 92vw);
+  }
+  .lightbox-frame img {
+    display: block;
+    max-height: 68vh;
+    max-width: 92vw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(.94) translateY(16px);
+    transition: opacity .45s ease, transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  .lightbox.open .lightbox-frame img.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .lightbox-frame img.is-out-next {
+    opacity: 0;
+    transform: translateX(-36px) scale(.97);
+  }
+  .lightbox-frame img.is-out-prev {
+    opacity: 0;
+    transform: translateX(36px) scale(.97);
+  }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: rgba(250,246,245,.12);
+    color: #faf6f5;
+    border: 1px solid rgba(250,246,245,.25);
+    display: grid;
+    place-items: center;
+    font-size: 1.35rem;
+    transition: background .25s ease, color .25s ease;
+  }
+  .lightbox-nav:hover {
+    background: #98211C;
+    color: #fff;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: rgba(250,246,245,.12);
+    color: #faf6f5;
+    border: 1px solid rgba(250,246,245,.25);
+    font-size: 1.7rem;
+    line-height: 1;
+    transition: background .25s ease;
+  }
+  .lightbox-close:hover { background: #98211C; }
+  .lightbox-thumbs {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    max-width: min(1100px, 92vw);
+    overflow-x: auto;
+    padding-bottom: .15rem;
+  }
+  .lightbox-thumbs button {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 48px;
+    overflow: hidden;
+    border-radius: .5rem;
+    border: 2px solid transparent;
+    opacity: .55;
+    transition: opacity .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .lightbox-thumbs button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .lightbox-thumbs button.is-active,
+  .lightbox-thumbs button:hover {
+    opacity: 1;
+    border-color: #DFBBB8;
+    transform: translateY(-2px);
+  }
 
   .reveal {
     opacity: 0;
@@ -189,11 +311,46 @@
   ::-webkit-scrollbar-track { background: #DFBBB8; }
   ::-webkit-scrollbar-thumb { background: #98211C; }
 
+  .service-card { cursor: pointer; }
+  .service-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(18, 3, 3, .72);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility .35s ease;
+  }
+  .service-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .service-modal-panel {
+    width: min(560px, 100%);
+    max-height: min(90vh, 760px);
+    overflow-y: auto;
+    background: #faf6f5;
+    color: #000;
+    transform: translateY(28px) scale(.96);
+    opacity: 0;
+    transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+  }
+  .service-modal.open .service-modal-panel {
+    transform: none;
+    opacity: 1;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .video-container { display: none; }
     .intro-gate { display: none; }
+    .service-modal, .service-modal-panel,
+    .lightbox, .lightbox-frame img { transition: none; }
   }
 </style>
 </head>
@@ -215,8 +372,8 @@
     <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
       <a href="tel:+12893121421" class="hover:text-gold-400 transition">(289) 312-1421</a>
       <a href="mailto:info@durhamislamiccentre.ca" class="hidden sm:inline hover:text-gold-400 transition">info@durhamislamiccentre.ca</a>
-      <span class="hidden lg:inline text-ivory-200/70">4618 Country Lane, Whitby, ON L1P 1V7</span>
-      <span class="text-gold-400 font-medium">E-Transfer: Donation@durhamislamiccentre.ca</span>
+      <span class="hidden lg:inline text-ivory-50">4618 Country Lane, Whitby, ON L1P 1V7</span>
+      <span class="text-ivory-50 font-medium">E-Transfer: Donation@durhamislamiccentre.ca</span>
     </div>
   </div>
 </div>
@@ -289,7 +446,7 @@
   <div class="absolute inset-0 pattern-dark opacity-15 pointer-events-none"></div>
 
   <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-24 pb-16 sm:pb-20">
-    <p class="ornament text-gold-400 mb-5">Welcome home to Iqra Masjid</p>
+    <p class="ornament text-ivory-50 mb-5">Welcome home to Iqra Masjid</p>
     <h1 class="font-display text-white text-[3rem] sm:text-6xl lg:text-7xl leading-[0.95] max-w-3xl">
       Worship. Learn.<br />Connect. Grow Together.
     </h1>
@@ -320,32 +477,32 @@
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌙</span>
         <strong class="block text-forest-900 text-sm">Fajr</strong>
         <b data-full-p="Fajr" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌅</span>
         <strong class="block text-forest-900 text-sm">Sunrise</strong>
         <b data-full-p="Sunrise" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">☀️</span>
         <strong class="block text-forest-900 text-sm">Dhuhr</strong>
         <b data-full-p="Dhuhr" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌤️</span>
         <strong class="block text-forest-900 text-sm">Asr</strong>
         <b data-full-p="Asr" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌆</span>
         <strong class="block text-forest-900 text-sm">Maghrib</strong>
         <b data-full-p="Maghrib" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+      <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">✨</span>
         <strong class="block text-forest-900 text-sm">Isha</strong>
         <b data-full-p="Isha" class="block mt-2 text-gold-600 text-lg">--:--</b>
@@ -387,7 +544,7 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
-      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+      <article class="group bg-white overflow-hidden rounded-2xl border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
         <div class="relative h-56 overflow-hidden">
           <img src="assets/images/gallery-4.jpg" alt="Children learning Quran" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
           <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">01</span>
@@ -398,7 +555,7 @@
           <a href="https://forms.gle/vqqySeJaaZkS8HJj8" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600 transition">Register now →</a>
         </div>
       </article>
-      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+      <article class="group bg-white overflow-hidden rounded-2xl border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
         <div class="relative h-56 overflow-hidden">
           <img src="assets/images/gallery-1.jpg" alt="Saturday Islamic School" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
           <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">02</span>
@@ -409,7 +566,7 @@
           <a href="https://forms.gle/6Ry9yxaQJUfrW2EG7" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600 transition">Register now →</a>
         </div>
       </article>
-      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+      <article class="group bg-white overflow-hidden rounded-2xl border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
         <div class="relative h-56 overflow-hidden">
           <img src="assets/images/gallery-5.jpg" alt="Youth and family programs" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
           <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">03</span>
@@ -430,35 +587,78 @@
   <div class="relative max-w-7xl mx-auto px-4">
     <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
       <div>
-        <p class="ornament text-gold-400 mb-3">Community support</p>
+        <p class="ornament text-ivory-50 mb-3">Community support</p>
         <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white">Services for every family</h2>
       </div>
       <p class="max-w-md text-ivory-200/80">Religious and practical support when the community needs it.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+      <button type="button" class="service-card text-left border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition" data-service="nikah">
         <p class="text-3xl mb-4">💍</p>
         <h3 class="font-display text-3xl mb-3">Nikah</h3>
-        <p class="text-ivory-200/80 leading-relaxed">Islamic marriage ceremony guidance and coordination.</p>
-      </article>
-      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-ivory-200/80 leading-relaxed mb-5">Islamic marriage ceremony guidance and coordination.</p>
+        <span class="text-gold-300 font-semibold">Request Nikah →</span>
+      </button>
+      <button type="button" class="service-card text-left border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition" data-service="janazah">
         <p class="text-3xl mb-4">🤲</p>
         <h3 class="font-display text-3xl mb-3">Janazah</h3>
-        <p class="text-ivory-200/80 leading-relaxed">Religious guidance and family support during difficult times.</p>
-      </article>
-      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-ivory-200/80 leading-relaxed mb-5">Religious guidance and family support during difficult times.</p>
+        <span class="text-gold-300 font-semibold">Request support →</span>
+      </button>
+      <button type="button" class="service-card text-left border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition" data-service="guidance">
         <p class="text-3xl mb-4">🧭</p>
         <h3 class="font-display text-3xl mb-3">Religious Guidance</h3>
-        <p class="text-ivory-200/80 leading-relaxed">Support with faith, family and everyday Islamic questions.</p>
-      </article>
-      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-ivory-200/80 leading-relaxed mb-5">Support with faith, family and everyday Islamic questions.</p>
+        <span class="text-gold-300 font-semibold">Ask a question →</span>
+      </button>
+      <button type="button" class="service-card text-left border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition" data-service="outreach">
         <p class="text-3xl mb-4">🤝</p>
         <h3 class="font-display text-3xl mb-3">Outreach</h3>
-        <p class="text-ivory-200/80 leading-relaxed">Building bridges and serving neighbours across Durham Region.</p>
-      </article>
+        <p class="text-ivory-200/80 leading-relaxed mb-5">Building bridges and serving neighbours across Durham Region.</p>
+        <span class="text-gold-300 font-semibold">Get involved →</span>
+      </button>
     </div>
   </div>
 </section>
+
+<div id="service-modal" class="service-modal" aria-hidden="true">
+  <div class="service-modal-panel p-7 sm:p-8" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+    <div class="flex items-start justify-between gap-4 mb-2">
+      <div>
+        <div class="flex items-center gap-3">
+          <p id="service-modal-emoji" class="text-3xl leading-none">💍</p>
+          <h3 id="service-modal-title" class="font-display text-3xl text-forest-900">Nikah</h3>
+        </div>
+      </div>
+      <button type="button" id="service-modal-close" class="text-3xl leading-none text-forest-900 hover:text-gold-500" aria-label="Close">&times;</button>
+    </div>
+    <p id="service-modal-intro" class="text-slate-600 mb-6">Please share a few details and we will follow up with you.</p>
+    <form id="service-form" class="space-y-4">
+      <input type="hidden" id="service-type" name="service" value="" />
+      <div>
+        <label for="service-name" class="block text-sm font-medium mb-1">Name</label>
+        <input type="text" id="service-name" name="name" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="service-email" class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" id="service-email" name="email" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="service-phone" class="block text-sm font-medium mb-1">Phone</label>
+        <input type="tel" id="service-phone" name="phone" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="service-extra" id="service-extra-label" class="block text-sm font-medium mb-1">Preferred date</label>
+        <input type="text" id="service-extra" name="extra" class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="service-message" class="block text-sm font-medium mb-1">Message</label>
+        <textarea id="service-message" name="message" rows="4" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-forest-900 hover:bg-forest-800 text-white font-semibold py-3.5 transition">Submit request</button>
+    </form>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section id="about" class="py-20 sm:py-24 bg-ivory-50">
@@ -572,26 +772,6 @@
         </div>
       </article>
     </div>
-
-    <div id="donate" class="grid lg:grid-cols-2 gap-6 scroll-mt-28">
-      <div class="bg-ivory-50 text-forest-900 p-8">
-        <h3 class="font-display text-3xl text-forest-900 mb-6">Direct Bank Deposit</h3>
-        <dl class="space-y-3">
-          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Bank</dt><dd class="font-semibold">TD Canada Trust</dd></div>
-          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Account Name</dt><dd class="font-semibold">Durham Islamic Centre</dd></div>
-          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Account No.</dt><dd class="font-semibold">18075006018</dd></div>
-          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Branch No.</dt><dd class="font-semibold">18072</dd></div>
-          <div class="flex justify-between"><dt class="text-slate-500">Institution No.</dt><dd class="font-semibold">004</dd></div>
-        </dl>
-      </div>
-      <div class="bg-ivory-50 text-forest-900 p-8 flex flex-col">
-        <h3 class="font-display text-3xl text-forest-900 mb-4">E-Transfer</h3>
-        <p class="text-slate-600 mb-3">Send your donation directly via Interac e-Transfer to:</p>
-        <p class="font-semibold text-lg bg-ivory-100 px-4 py-3 break-all">Donation@durhamislamiccentre.ca</p>
-        <p class="text-slate-500 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
-        <a href="#contact" class="mt-auto pt-6 inline-flex justify-center bg-gold-400 hover:bg-gold-500 text-white font-semibold px-6 py-3 transition">Donate Now</a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -666,22 +846,22 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-      <button type="button" class="gallery-tile relative overflow-hidden aspect-[4/5] md:aspect-square" onclick="openLightbox(0)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-[4/5] md:aspect-square" onclick="openLightbox(0)">
         <img src="assets/images/gallery-1.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(1)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(1)">
         <img src="assets/images/gallery-2.jpg" alt="Durham Islamic Centre grounds" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(2)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(2)">
         <img src="assets/images/gallery-3.jpg" alt="Masjid entrance and progress" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(3)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(3)">
         <img src="assets/images/gallery-4.jpg" alt="Iqra Masjid prayer hall" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(4)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(4)">
         <img src="assets/images/gallery-5.jpg" alt="Community gathering" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden col-span-2 md:col-span-3 aspect-[16/7]" onclick="openLightbox(5)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl col-span-2 md:col-span-3 aspect-[16/7]" onclick="openLightbox(5)">
         <img src="assets/images/gallery-6.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
       </button>
     </div>
@@ -689,11 +869,20 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div id="lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center bg-forest-950/92" onclick="closeLightbox()">
-  <button type="button" onclick="closeLightbox()" class="absolute top-5 right-5 text-white hover:text-gold-400 text-4xl leading-none" aria-label="Close">&times;</button>
-  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(-1)" class="absolute left-3 sm:left-6 text-white hover:text-gold-400 text-4xl" aria-label="Previous">←</button>
-  <img id="lightbox-img" src="" alt="Gallery image" class="max-h-[86vh] max-w-[90vw] shadow-2xl" onclick="event.stopPropagation()" />
-  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(1)" class="absolute right-3 sm:right-6 text-white hover:text-gold-400 text-4xl" aria-label="Next">→</button>
+<div id="lightbox" class="lightbox" aria-hidden="true" onclick="closeLightbox()">
+  <button type="button" onclick="closeLightbox()" class="lightbox-close" aria-label="Close">&times;</button>
+  <div class="relative w-full max-w-[1100px] flex items-center justify-center" onclick="event.stopPropagation()">
+    <button type="button" onclick="changeLightboxImage(-1)" class="lightbox-nav left-0 sm:-left-2 z-10" aria-label="Previous">‹</button>
+    <figure class="lightbox-frame mx-12 sm:mx-16">
+      <img id="lightbox-img" src="" alt="Gallery image" />
+    </figure>
+    <button type="button" onclick="changeLightboxImage(1)" class="lightbox-nav right-0 sm:-right-2 z-10" aria-label="Next">›</button>
+  </div>
+  <div class="mt-5 text-center text-ivory-50" onclick="event.stopPropagation()">
+    <p id="lightbox-caption" class="font-display text-2xl sm:text-3xl">Community</p>
+    <p id="lightbox-count" class="mt-1 text-sm tracking-widest uppercase text-gold-300">1 / 6</p>
+  </div>
+  <div id="lightbox-thumbs" class="lightbox-thumbs" onclick="event.stopPropagation()"></div>
 </div>
 
 <!-- CONTACT -->
@@ -741,22 +930,32 @@
       </iframe>
     </div>
 
-    <form id="contact-form" class="max-w-3xl mx-auto bg-white border border-forest-900/10 p-8 space-y-5">
-      <h3 class="font-display text-3xl text-forest-900">Send a message</h3>
-      <div>
-        <label for="name" class="block text-sm font-medium mb-1">Name</label>
-        <input type="text" id="name" name="name" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+    <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+      <form id="contact-form" class="bg-white border border-forest-900/10 p-8 space-y-5">
+        <h3 class="font-display text-3xl text-forest-900">Send a message</h3>
+        <div>
+          <label for="name" class="block text-sm font-medium mb-1">Name</label>
+          <input type="text" id="name" name="name" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" id="email" name="email" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium mb-1">Message</label>
+          <textarea id="message" name="message" rows="5" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-forest-900 hover:bg-forest-800 text-white font-semibold py-3.5 transition">Submit Message</button>
+      </form>
+
+      <div id="donate" class="bg-white border border-forest-900/10 p-8 flex flex-col scroll-mt-28">
+        <h3 class="font-display text-3xl text-forest-900 mb-4">E-Transfer</h3>
+        <p class="text-slate-600 mb-3">Send your donation directly via Interac e-Transfer to:</p>
+        <p class="font-semibold text-lg bg-ivory-100 px-4 py-3 break-all">Donation@durhamislamiccentre.ca</p>
+        <p class="text-slate-500 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
+        <a href="mailto:Donation@durhamislamiccentre.ca" class="mt-auto pt-6 inline-flex justify-center bg-gold-400 hover:bg-gold-500 text-white font-semibold px-6 py-3 transition">Donate Now</a>
       </div>
-      <div>
-        <label for="email" class="block text-sm font-medium mb-1">Email</label>
-        <input type="email" id="email" name="email" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
-      </div>
-      <div>
-        <label for="message" class="block text-sm font-medium mb-1">Message</label>
-        <textarea id="message" name="message" rows="5" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700"></textarea>
-      </div>
-      <button type="submit" class="w-full bg-forest-900 hover:bg-forest-800 text-white font-semibold py-3.5 transition">Submit Message</button>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -873,6 +1072,87 @@
     revealEls.forEach((el) => el.classList.add('in'));
   }
 
+  const serviceCopy = {
+    nikah: {
+      emoji: '💍',
+      title: 'Nikah request',
+      intro: 'Share your details and preferred date. We will coordinate the Nikah ceremony with you.',
+      extraLabel: 'Preferred Nikah date',
+      extraPlaceholder: 'e.g. Saturday, September 12',
+    },
+    janazah: {
+      emoji: '🤲',
+      title: 'Janazah support',
+      intro: 'We are here to support your family. Please share what you need and how we can reach you.',
+      extraLabel: 'Preferred date or time, if known',
+      extraPlaceholder: 'As soon as possible, or a specific time',
+    },
+    guidance: {
+      emoji: '🧭',
+      title: 'Religious guidance',
+      intro: 'Ask a question about faith, family, or everyday Islamic matters. A team member will follow up.',
+      extraLabel: 'Topic',
+      extraPlaceholder: 'e.g. family, worship, new to Islam',
+    },
+    outreach: {
+      emoji: '🤝',
+      title: 'Outreach & community',
+      intro: 'Tell us how you’d like to get involved or what support you are looking for in Durham Region.',
+      extraLabel: 'How would you like to help?',
+      extraPlaceholder: 'e.g. volunteer, partnership, neighbourhood event',
+    },
+  };
+
+  const serviceModal = document.getElementById('service-modal');
+  const serviceForm = document.getElementById('service-form');
+  const serviceTitle = document.getElementById('service-modal-title');
+  const serviceIntro = document.getElementById('service-modal-intro');
+  const serviceEmoji = document.getElementById('service-modal-emoji');
+  const serviceType = document.getElementById('service-type');
+  const serviceExtraLabel = document.getElementById('service-extra-label');
+  const serviceExtra = document.getElementById('service-extra');
+
+  function openServiceModal(key) {
+    const copy = serviceCopy[key];
+    if (!copy || !serviceModal) return;
+    serviceEmoji.textContent = copy.emoji;
+    serviceTitle.textContent = copy.title;
+    serviceIntro.textContent = copy.intro;
+    serviceType.value = key;
+    serviceExtraLabel.textContent = copy.extraLabel;
+    serviceExtra.placeholder = copy.extraPlaceholder;
+    serviceModal.classList.add('open');
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('overflow-hidden');
+    setTimeout(() => document.getElementById('service-name').focus(), 80);
+  }
+
+  function closeServiceModal() {
+    if (!serviceModal) return;
+    serviceModal.classList.remove('open');
+    serviceModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  document.querySelectorAll('.service-card').forEach((card) => {
+    card.addEventListener('click', () => openServiceModal(card.dataset.service));
+  });
+  document.getElementById('service-modal-close').addEventListener('click', closeServiceModal);
+  serviceModal.addEventListener('click', (e) => {
+    if (e.target === serviceModal) closeServiceModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && serviceModal.classList.contains('open')) closeServiceModal();
+  });
+  if (serviceForm) {
+    serviceForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('JazakAllah khair. We received your request and will contact you soon, InshaAllah.');
+      serviceForm.reset();
+      closeServiceModal();
+    });
+  }
+
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -953,39 +1233,94 @@
   showAbout(0);
   startAbout();
 
-  const galleryImages = [
-    'assets/images/gallery-1.jpg',
-    'assets/images/gallery-2.jpg',
-    'assets/images/gallery-3.jpg',
-    'assets/images/gallery-4.jpg',
-    'assets/images/gallery-5.jpg',
-    'assets/images/gallery-6.jpg',
+  const galleryItems = [
+    { src: 'assets/images/gallery-1.jpg', caption: 'Durham Islamic Centre community' },
+    { src: 'assets/images/gallery-2.jpg', caption: 'Durham Islamic Centre grounds' },
+    { src: 'assets/images/gallery-3.jpg', caption: 'Masjid entrance and progress' },
+    { src: 'assets/images/gallery-4.jpg', caption: 'Iqra Masjid prayer hall' },
+    { src: 'assets/images/gallery-5.jpg', caption: 'Community gathering' },
+    { src: 'assets/images/gallery-6.jpg', caption: 'Building our home together' },
   ];
   let currentLightboxIndex = 0;
-  function openLightbox(index) {
+  let lightboxBusy = false;
+  const lightboxEl = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxCount = document.getElementById('lightbox-count');
+  const lightboxThumbs = document.getElementById('lightbox-thumbs');
+
+  galleryItems.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerHTML = `<img src="${item.src}" alt="" />`;
+    btn.addEventListener('click', () => showLightboxImage(i));
+    lightboxThumbs.appendChild(btn);
+  });
+
+  function updateLightboxMeta() {
+    const item = galleryItems[currentLightboxIndex];
+    lightboxImg.alt = item.caption;
+    lightboxCaption.textContent = item.caption;
+    lightboxCount.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
+    [...lightboxThumbs.children].forEach((thumb, i) => {
+      thumb.classList.toggle('is-active', i === currentLightboxIndex);
+    });
+  }
+
+  function showLightboxImage(index, direction) {
+    if (lightboxBusy) return;
+    currentLightboxIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[currentLightboxIndex];
+    const outClass = direction > 0 ? 'is-out-next' : direction < 0 ? 'is-out-prev' : '';
+    lightboxBusy = true;
+    lightboxImg.classList.remove('is-in');
+    if (outClass) lightboxImg.classList.add(outClass);
+    window.setTimeout(() => {
+      lightboxImg.src = item.src;
+      lightboxImg.classList.remove('is-out-next', 'is-out-prev');
+      updateLightboxMeta();
+      requestAnimationFrame(() => lightboxImg.classList.add('is-in'));
+      lightboxBusy = false;
+    }, outClass ? 220 : 20);
+  }
+
+  window.openLightbox = function openLightbox(index) {
     currentLightboxIndex = index;
-    document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
-    const box = document.getElementById('lightbox');
-    box.classList.remove('hidden');
-    box.classList.add('flex');
+    lightboxImg.classList.remove('is-in', 'is-out-next', 'is-out-prev');
+    lightboxImg.src = galleryItems[index].src;
+    updateLightboxMeta();
+    lightboxEl.classList.add('open');
+    lightboxEl.setAttribute('aria-hidden', 'false');
     document.body.classList.add('overflow-hidden');
-  }
-  function closeLightbox() {
-    const box = document.getElementById('lightbox');
-    box.classList.add('hidden');
-    box.classList.remove('flex');
+    requestAnimationFrame(() => lightboxImg.classList.add('is-in'));
+  };
+  window.closeLightbox = function closeLightbox() {
+    lightboxEl.classList.remove('open');
+    lightboxEl.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('overflow-hidden');
-  }
-  function changeLightboxImage(direction) {
-    currentLightboxIndex = (currentLightboxIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
-  }
+    lightboxImg.classList.remove('is-in');
+  };
+  window.changeLightboxImage = function changeLightboxImage(direction) {
+    showLightboxImage(currentLightboxIndex + direction, direction);
+  };
+
   document.addEventListener('keydown', (e) => {
-    if (document.getElementById('lightbox').classList.contains('hidden')) return;
+    if (!lightboxEl.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') changeLightboxImage(-1);
     if (e.key === 'ArrowRight') changeLightboxImage(1);
   });
+
+  let touchStartX = 0;
+  lightboxEl.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lightboxEl.addEventListener('touchend', (e) => {
+    if (!lightboxEl.classList.contains('open')) return;
+    const delta = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(delta) < 50) return;
+    changeLightboxImage(delta < 0 ? 1 : -1);
+  }, { passive: true });
 </script>
 </body>
 </html>
