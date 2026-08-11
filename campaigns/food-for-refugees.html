@@ -5,179 +5,114 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Food For Refugees | Durham Islamic Centre</title>
 <meta name="description" content="Support the Food For Refugees campaign by Durham Islamic Centre - Iqra Masjid, Whitby, ON." />
-
-<!-- Tailwind CSS (local) -->
 <script src="../assets/js/tailwind.js"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          maroon: { 50: '#fbf2f2', 600: '#8b3a3a', 700: '#7a3232', 900: '#5c2222' },
-          amber: { 500: '#d4af37', 600: '#b8952e' }
+          forest: { 950: '#6e1814', 900: '#98211C', 800: '#98211C', 700: '#A74641' },
+          gold: { 400: '#A74641', 500: '#98211C', 600: '#98211C' },
+          ivory: { 50: '#FAF6F5', 100: '#F3E7E6', 200: '#DFBBB8' }
         },
         fontFamily: {
-          sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          serif: ['"Playfair Display"', 'serif'],
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         }
       }
     }
   }
 </script>
-
-<!-- Google Fonts (local) -->
-<link href="../assets/fonts/fonts.css" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Poppins', sans-serif; }
-  h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
+  body { font-family: 'Outfit', sans-serif; background: #FAF6F5; color: #000000; }
+  h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
   .nav-link { position: relative; }
-  .nav-link::after {
-    content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px;
-    background-color: #d4af37; transition: width 0.3s ease;
-  }
+  .nav-link::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1.5px; background: #A74641; transition: width .3s; }
   .nav-link:hover::after { width: 100%; }
-  .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
-  .mobile-menu.open { transform: translateX(0); }
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #f9f7f4; }
-  ::-webkit-scrollbar-thumb { background: #8b3a3a; border-radius: 4px; }
+  .mobile-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  .mobile-drawer.open { transform: translateX(0); }
 </style>
 </head>
+<body class="bg-ivory-50 text-slate-900 antialiased">
 
-<body class="bg-stone-50 text-slate-900 antialiased">
-
-<!-- TOP BAR -->
-<div class="bg-maroon-900 text-white text-xs sm:text-sm">
-  <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
-    <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-      <a href="tel:+12893121421" class="hover:text-amber-500 transition">(289) 312-1421</a>
-      <a href="mailto:info@durhamislamiccentre.ca" class="hidden sm:inline hover:text-amber-500 transition">info@durhamislamiccentre.ca</a>
-      <span class="hidden md:inline">4618 Country Lane, Whitby, ON L1P 1V7</span>
-    </div>
-    <span class="text-amber-500 font-semibold">E-Transfer: Donation@durhamislamiccentre.ca</span>
+<div class="bg-forest-900 text-ivory-50 text-xs">
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <a href="tel:+12893121421" class="hover:text-gold-400">(289) 312-1421</a>
+    <span class="text-gold-400 font-medium">E-Transfer: Donation@durhamislamiccentre.ca</span>
   </div>
 </div>
 
-<!-- STICKY NAV -->
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
-  <nav class="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
-    <a href="../#home" class="flex items-center gap-3">
-      <img src="../assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-10 sm:h-12 w-auto" />
-    </a>
-    <ul class="hidden lg:flex items-center gap-8 text-slate-700 font-medium">
-      <li><a href="../#home" class="nav-link hover:text-maroon-900">Home</a></li>
-      <li><a href="../#prayer-times" class="nav-link hover:text-maroon-900">Prayer Times</a></li>
-      <li><a href="../#about" class="nav-link hover:text-maroon-900">About</a></li>
-      <li><a href="../#programs" class="nav-link hover:text-maroon-900">Programs</a></li>
-      <li><a href="../#our-journey" class="nav-link hover:text-maroon-900">Our Journey</a></li>
-      <li><a href="../#gallery" class="nav-link hover:text-maroon-900">Gallery</a></li>
-      <li><a href="../#contact" class="nav-link hover:text-maroon-900">Contact</a></li>
+<header class="sticky top-0 z-50 bg-ivory-50/92 backdrop-blur border-b border-forest-900/10">
+  <nav class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+    <a href="../#home"><img src="../assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-12 w-auto" /></a>
+    <ul class="hidden lg:flex items-center gap-7 text-sm font-medium text-forest-800">
+      <li><a href="../#home" class="nav-link">Home</a></li>
+      <li><a href="../#prayers" class="nav-link">Prayer Times</a></li>
+      <li><a href="../#about" class="nav-link">About</a></li>
+      <li><a href="../#programs" class="nav-link">Programs</a></li>
+      <li><a href="../#journey" class="nav-link">Our Journey</a></li>
+      <li><a href="../#contact" class="nav-link">Contact</a></li>
     </ul>
     <div class="flex items-center gap-3">
-      <a href="../#our-journey" class="hidden sm:inline-block bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-5 py-2.5 rounded-full shadow transition">Donate Now</a>
-      <button id="menu-btn" class="lg:hidden text-maroon-900" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+      <a href="../#donate" class="hidden sm:inline-flex bg-gold-400 hover:bg-gold-500 text-white font-semibold px-5 py-2.5">Donate Now</a>
+      <button id="menu-btn" class="lg:hidden text-forest-900" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </nav>
-  <div id="mobile-overlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
-  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 z-50 h-full w-72 bg-white shadow-2xl lg:hidden p-6">
+  <div id="mobile-overlay" class="fixed inset-0 bg-forest-950/50 z-40 hidden lg:hidden"></div>
+  <div id="mobile-menu" class="mobile-drawer fixed top-0 right-0 z-50 h-full w-72 bg-ivory-50 shadow-2xl lg:hidden p-6">
     <div class="flex justify-between items-center mb-8">
-      <p class="font-display font-bold text-maroon-900 text-lg">Menu</p>
-      <button id="close-menu" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-maroon-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+      <p class="font-display text-2xl text-forest-900">Menu</p>
+      <button id="close-menu" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg></button>
     </div>
-    <ul class="flex flex-col gap-5 text-slate-700 font-medium">
-      <li><a href="../#home" class="mobile-nav-link block hover:text-amber-600">Home</a></li>
-      <li><a href="../#prayer-times" class="mobile-nav-link block hover:text-amber-600">Prayer Times</a></li>
-      <li><a href="../#about" class="mobile-nav-link block hover:text-amber-600">About</a></li>
-      <li><a href="../#programs" class="mobile-nav-link block hover:text-amber-600">Programs</a></li>
-      <li><a href="../#our-journey" class="mobile-nav-link block hover:text-amber-600">Our Journey</a></li>
-      <li><a href="../#gallery" class="mobile-nav-link block hover:text-amber-600">Gallery</a></li>
-      <li><a href="../#contact" class="mobile-nav-link block hover:text-amber-600">Contact</a></li>
+    <ul class="flex flex-col gap-5 font-medium text-forest-800">
+      <li><a href="../#home" class="mobile-nav-link">Home</a></li>
+      <li><a href="../#prayers" class="mobile-nav-link">Prayer Times</a></li>
+      <li><a href="../#journey" class="mobile-nav-link">Our Journey</a></li>
+      <li><a href="../#contact" class="mobile-nav-link">Contact</a></li>
     </ul>
   </div>
 </header>
 
-<!-- CAMPAIGN HERO -->
-<section class="relative">
-  <div class="h-72 sm:h-96 overflow-hidden">
-    <img src="../assets/images/gallery-4.jpg" alt="Food For Refugees" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-maroon-900/70"></div>
-  </div>
+<section class="relative h-72 sm:h-96 overflow-hidden">
+  <img src="../assets/images/gallery-4.jpg" alt="Food For Refugees" class="w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-forest-950/70"></div>
   <div class="absolute inset-0 flex items-center">
     <div class="max-w-5xl mx-auto px-4 text-white w-full">
-      <a href="../#our-journey" class="inline-flex items-center gap-1 text-amber-500 text-sm font-medium mb-4 hover:text-amber-400 transition">&larr; Back to Our Journey</a>
-      <span class="inline-block text-xs font-semibold uppercase tracking-wide bg-white/15 text-amber-500 px-3 py-1 rounded-full mb-4">Campaign has ended</span>
-      <h1 class="font-display text-3xl sm:text-5xl font-bold">Food For Refugees</h1>
+      <a href="../#journey" class="inline-flex text-gold-400 text-sm font-medium mb-4 hover:text-gold-300">← Back to Our Journey</a>
+      <span class="inline-block text-[11px] font-semibold uppercase tracking-wider bg-white/10 text-gold-400 px-3 py-1 mb-4">Campaign has ended</span>
+      <h1 class="font-display text-4xl sm:text-6xl">Food For Refugees</h1>
     </div>
   </div>
 </section>
 
-<!-- CAMPAIGN BODY -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-ivory-50">
   <div class="max-w-4xl mx-auto px-4">
     <p class="text-slate-600 leading-relaxed mb-6">Durham Islamic Centre partnered with local community members to provide food relief for refugee families settling in the Durham Region. This campaign helped supply essential groceries and prepared meals to families adjusting to a new country while facing food insecurity.</p>
     <p class="text-slate-600 leading-relaxed mb-6">Donations collected were used to purchase halal groceries, staple foods, and warm meals, distributed directly to families in need with the help of community volunteers.</p>
-
-    <h2 class="font-display text-2xl font-bold text-maroon-900 mt-10 mb-4">What This Campaign Provided</h2>
+    <h2 class="font-display text-3xl text-forest-900 mt-10 mb-4">What This Campaign Provided</h2>
     <ul class="space-y-3 text-slate-600">
-      <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">🍚</span> Staple grocery items such as rice, oats, and cereals</li>
-      <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">🍞</span> Bread, water, and prepared meals for families</li>
-      <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">🧥</span> Winter clothing and blankets for newly arrived families</li>
-      <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">💊</span> Basic medicine and hygiene supplies</li>
+      <li>🍚 Staple grocery items such as rice, oats, and cereals</li>
+      <li>🍞 Bread, water, and prepared meals for families</li>
+      <li>🧥 Winter clothing and blankets for newly arrived families</li>
+      <li>💊 Basic medicine and hygiene supplies</li>
     </ul>
-
-    <div class="mt-12 bg-maroon-50 border border-maroon-900/10 rounded-2xl p-8 text-center">
-      <p class="text-maroon-900 font-semibold mb-4">This campaign has ended, but Durham Islamic Centre continues to support families in need through ongoing community relief efforts.</p>
-      <a href="../#our-journey" class="inline-block bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">View Current Campaigns & Donate</a>
+    <div class="mt-12 bg-ivory-100 border border-forest-900/10 p-8 text-center">
+      <p class="text-forest-900 font-semibold mb-4">This campaign has ended, but Durham Islamic Centre continues to support families in need through ongoing community relief efforts.</p>
+      <a href="../#donate" class="inline-block bg-gold-400 hover:bg-gold-500 text-white font-semibold px-8 py-3">View Current Campaigns & Donate</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-maroon-900 text-white pt-16 pb-8">
-  <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-    <div>
-      <div class="flex items-center gap-3 mb-4">
-        <span class="bg-white rounded-lg p-1.5 inline-flex items-center">
-          <img src="../assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-8 w-auto" />
-        </span>
-        <p class="font-display font-bold text-lg text-white">Durham Islamic Centre</p>
-      </div>
-      <p class="text-white/70 text-sm leading-relaxed">A CRA registered charity organization serving the Muslim community of Whitby and surrounding areas since 2012.</p>
-    </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Quick Links</h4>
-      <ul class="space-y-2 text-sm text-white/70">
-        <li><a href="../#home" class="hover:text-amber-500 transition">Home</a></li>
-        <li><a href="../#our-journey" class="hover:text-amber-500 transition">Our Journey</a></li>
-        <li><a href="../#gallery" class="hover:text-amber-500 transition">Gallery</a></li>
-        <li><a href="../#contact" class="hover:text-amber-500 transition">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Charity Status</h4>
-      <p class="text-sm text-white/70 leading-relaxed">Durham Islamic Centre is a registered charity with the Canada Revenue Agency (CRA). All eligible donations are tax-deductible.</p>
-    </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Contact Info</h4>
-      <ul class="space-y-2 text-sm text-white/70">
-        <li>4618 Country Lane, Whitby, ON L1P 1V7</li>
-        <li>(289) 312-1421</li>
-        <li>info@durhamislamiccentre.ca</li>
-      </ul>
-    </div>
-  </div>
-  <div class="border-t border-white/10 pt-6">
-    <p class="text-center text-sm text-white/60">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+<footer class="bg-forest-950 text-ivory-50 pt-14 pb-8">
+  <div class="max-w-7xl mx-auto px-4 text-sm text-ivory-50/70">
+    <p class="mb-6">A CRA registered charity serving Whitby and surrounding areas since 2012.</p>
+    <p class="border-t border-white/10 pt-6 text-center text-ivory-50/50">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
   </div>
 </footer>
 
@@ -186,12 +121,12 @@
   const closeMenu = document.getElementById('close-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
-  function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.remove('hidden'); }
-  function closeMobileMenuFn() { mobileMenu.classList.remove('open'); mobileOverlay.classList.add('hidden'); }
-  menuBtn.addEventListener('click', openMobileMenu);
-  closeMenu.addEventListener('click', closeMobileMenuFn);
-  mobileOverlay.addEventListener('click', closeMobileMenuFn);
-  document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', closeMobileMenuFn));
+  const openMenu = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.remove('hidden'); };
+  const closeMenuFn = () => { mobileMenu.classList.remove('open'); mobileOverlay.classList.add('hidden'); };
+  menuBtn.addEventListener('click', openMenu);
+  closeMenu.addEventListener('click', closeMenuFn);
+  mobileOverlay.addEventListener('click', closeMenuFn);
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => link.addEventListener('click', closeMenuFn));
 </script>
 </body>
 </html>

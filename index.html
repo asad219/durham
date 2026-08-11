@@ -2,712 +2,892 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Durham Islamic Centre | Iqra Masjid - Whitby, ON</title>
-<meta name="description" content="Durham Islamic Centre (Iqra Masjid) - Serving the Muslim community of Whitby and surrounding areas since 2012. Daily Salah, Quran classes, and community programs." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Durham Islamic Centre | Iqra Masjid — Whitby, ON</title>
+<meta name="description" content="Durham Islamic Centre (Iqra Masjid) — serving Whitby and surrounding communities since 2012. Daily Salah, Islamic education, youth programs, and compassionate community service." />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 
-<!-- Tailwind CSS (local) -->
 <script src="assets/js/tailwind.js"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          maroon: {
-            50: '#fbf2f2',
-            600: '#8b3a3a',
-            700: '#7a3232',
-            900: '#5c2222',
+          forest: {
+            950: '#6e1814',
+            900: '#98211C',
+            800: '#98211C',
+            700: '#A74641',
+            600: '#A74641',
           },
-          amber: {
-            500: '#d4af37',
-            600: '#b8952e',
+          gold: {
+            300: '#DFBBB8',
+            400: '#A74641',
+            500: '#98211C',
+            600: '#98211C',
+          },
+          ivory: {
+            50: '#FAF6F5',
+            100: '#F3E7E6',
+            200: '#DFBBB8',
           }
         },
         fontFamily: {
-          sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          serif: ['"Playfair Display"', 'serif'],
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         }
       }
     }
   }
 </script>
 
-<!-- Google Fonts (local) -->
-<link href="assets/fonts/fonts.css" rel="stylesheet">
-
-<!-- Swiper.js CSS (local) -->
-<link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
+  :root {
+    --forest: #98211C;
+    --forest-deep: #6e1814;
+    --gold: #A74641;
+    --ivory: #FAF6F5;
+    --ink: #000000;
+  }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Poppins', sans-serif; }
-  h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--ink);
+    background: var(--ivory);
+  }
+  h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
 
-  .swiper-pagination-bullet { background: #fff; opacity: 0.6; }
-  .swiper-pagination-bullet-active { background: #d4af37; opacity: 1; }
-  .swiper-button-next, .swiper-button-prev { color: #d4af37 !important; }
+  .pattern-veil {
+    background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 4 L40 20 L56 16 L44 28 L60 36 L44 44 L56 56 L40 52 L36 68 L32 52 L16 56 L28 44 L12 36 L28 28 L16 16 L32 20 Z' fill='none' stroke='%2398211C' stroke-width='.6' opacity='.18'/%3E%3C/svg%3E");
+  }
+  .pattern-dark {
+    background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 4 L40 20 L56 16 L44 28 L60 36 L44 44 L56 56 L40 52 L36 68 L32 52 L16 56 L28 44 L12 36 L28 28 L16 16 L32 20 Z' fill='none' stroke='%23DFBBB8' stroke-width='.55' opacity='.14'/%3E%3C/svg%3E");
+  }
 
-  .gallery-item img { transition: transform 0.5s ease; }
-  .gallery-item:hover img { transform: scale(1.08); }
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--gold);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .ornament::before, .ornament::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: .7;
+  }
 
   .nav-link { position: relative; }
   .nav-link::after {
     content: '';
     position: absolute;
-    left: 0; bottom: -4px;
-    width: 0; height: 2px;
-    background-color: #d4af37;
-    transition: width 0.3s ease;
+    left: 0; bottom: -6px;
+    width: 0; height: 1.5px;
+    background: var(--gold);
+    transition: width .3s ease;
   }
-  .nav-link:hover::after { width: 100%; }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-  .timeline-dot::before {
-    content: '';
+  .mobile-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  .mobile-drawer.open { transform: translateX(0); }
+
+  .arch-card {
+    clip-path: polygon(0 12%, 8% 0, 92% 0, 100% 12%, 100% 100%, 0 100%);
+  }
+
+  .frame-gold {
+    box-shadow:
+      0 0 0 1px rgba(152,33,28,.45),
+      0 0 0 8px rgba(152,33,28,.08),
+      0 24px 60px rgba(152,33,28,.16);
+  }
+
+  .gallery-tile img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .gallery-tile:hover img { transform: scale(1.08); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .intro-gate {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: #98211C;
+    color: #DFBBB8;
+    transition: opacity .9s ease, visibility .9s ease;
+  }
+  .intro-gate.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+  .intro-arabic {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    animation: rise 1.1s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .header-shell { transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
+  .header-shell.scrolled {
+    background: rgba(250,246,245,.94);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(152,33,28,.08);
+  }
+
+  .video-container {
     position: absolute;
-    top: 0; bottom: 0; left: 50%;
-    width: 2px;
-    background: #d4af37;
-    transform: translateX(-50%);
-    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: #6e1814;
   }
-
-  .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
-  .mobile-menu.open { transform: translateX(0); }
+  .video-container iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw;
+    min-height: 100%;
+    min-width: 177.78vh;
+    transform: translate(-50%, -50%) scale(1.25);
+    border: 0;
+  }
+  .video-shield {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: transparent;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(18,3,3,.78) 0%, rgba(152,33,28,.42) 42%, rgba(18,3,3,.18) 72%, rgba(18,3,3,.28) 100%),
+      linear-gradient(180deg, rgba(18,3,3,.28) 0%, transparent 22%, transparent 62%, rgba(18,3,3,.55) 100%);
+  }
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 140px 40px rgba(18,3,3,.45);
+  }
 
   ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #f9f7f4; }
-  ::-webkit-scrollbar-thumb { background: #8b3a3a; border-radius: 4px; }
+  ::-webkit-scrollbar-track { background: #DFBBB8; }
+  ::-webkit-scrollbar-thumb { background: #98211C; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .video-container { display: none; }
+    .intro-gate { display: none; }
+  }
 </style>
 </head>
 
-<body class="bg-stone-50 text-slate-900 antialiased">
+<body class="bg-ivory-50 text-black antialiased">
 
-<!-- =============================== -->
-<!-- TOP ANNOUNCEMENT / QUICK BAR -->
-<!-- =============================== -->
-<div class="bg-maroon-900 text-white text-xs sm:text-sm">
-  <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
-    <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-      <a href="tel:+12893121421" class="flex items-center gap-1 hover:text-amber-500 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
-        (289) 312-1421
-      </a>
-      <a href="mailto:info@durhamislamiccentre.ca" class="hidden sm:flex items-center gap-1 hover:text-amber-500 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
-        info@durhamislamiccentre.ca
-      </a>
-      <span class="hidden md:flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /></svg>
-        4618 Country Lane, Whitby, ON L1P 1V7
-      </span>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="text-amber-500 font-semibold">E-Transfer: Donation@durhamislamiccentre.ca</span>
+<!-- INTRO -->
+<div class="intro-gate" id="introGate" aria-hidden="true">
+  <div class="text-center px-6">
+    <p class="intro-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <p class="mt-4 text-[11px] tracking-[0.28em] uppercase text-gold-400 font-semibold">Durham Islamic Centre · Iqra Masjid</p>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="bg-forest-900 text-ivory-100 text-[11px] sm:text-xs tracking-wide">
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <p class="text-gold-300/90">Assalamu Alaikum — Welcome to Durham Islamic Centre</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+      <a href="tel:+12893121421" class="hover:text-gold-400 transition">(289) 312-1421</a>
+      <a href="mailto:info@durhamislamiccentre.ca" class="hidden sm:inline hover:text-gold-400 transition">info@durhamislamiccentre.ca</a>
+      <span class="hidden lg:inline text-ivory-200/70">4618 Country Lane, Whitby, ON L1P 1V7</span>
+      <span class="text-gold-400 font-medium">E-Transfer: Donation@durhamislamiccentre.ca</span>
     </div>
   </div>
 </div>
 
-<!-- =============================== -->
-<!-- STICKY NAVIGATION HEADER -->
-<!-- =============================== -->
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
-  <nav class="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
-    <!-- Logo -->
-    <a href="#home" class="flex items-center gap-3">
-      <img src="assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-10 sm:h-12 w-auto" />
+<!-- HEADER -->
+<header class="header-shell sticky top-0 z-50 bg-ivory-50/80 backdrop-blur-md border-b border-forest-900/10">
+  <nav class="max-w-7xl mx-auto px-4 h-[78px] sm:h-[88px] flex items-center justify-between gap-4">
+    <a href="#home" class="shrink-0" aria-label="Durham Islamic Centre home">
+      <img src="assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-11 sm:h-14 w-auto" />
     </a>
 
-    <!-- Desktop Nav Links -->
-    <ul class="hidden lg:flex items-center gap-8 text-slate-700 font-medium">
-      <li><a href="#home" class="nav-link hover:text-maroon-900">Home</a></li>
-      <li><a href="#prayer-times" class="nav-link hover:text-maroon-900">Prayer Times</a></li>
-      <li><a href="#about" class="nav-link hover:text-maroon-900">About</a></li>
-      <li><a href="#programs" class="nav-link hover:text-maroon-900">Programs</a></li>
-      <li><a href="#our-journey" class="nav-link hover:text-maroon-900">Our Journey</a></li>
-      <li><a href="#gallery" class="nav-link hover:text-maroon-900">Gallery</a></li>
-      <li><a href="#contact" class="nav-link hover:text-maroon-900">Contact</a></li>
+    <ul class="hidden xl:flex items-center gap-6 text-[13px] font-medium text-forest-800">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#prayers" class="nav-link">Prayer Times</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#programs" class="nav-link">Programs</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#journey" class="nav-link">Our Journey</a></li>
+      <li><a href="#leadership" class="nav-link">Leadership</a></li>
+      <li><a href="#gallery" class="nav-link">Gallery</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
 
-    <!-- Right: Donate + Hamburger -->
     <div class="flex items-center gap-3">
-      <a href="#our-journey" class="hidden sm:inline-block bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-5 py-2.5 rounded-full shadow transition">Donate Now</a>
-      <button id="menu-btn" class="lg:hidden text-maroon-900" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+      <a href="#donate" class="hidden sm:inline-flex items-center bg-gold-400 hover:bg-gold-500 text-white font-semibold text-sm px-5 py-2.5 transition">Donate Now</a>
+      <button id="menu-btn" class="xl:hidden text-forest-900 p-1" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-overlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
-  <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 z-50 h-full w-72 bg-white shadow-2xl lg:hidden p-6">
-    <div class="flex justify-between items-center mb-8">
-      <p class="font-display font-bold text-maroon-900 text-lg">Menu</p>
-      <button id="close-menu" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-maroon-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
+  <div id="mobile-overlay" class="fixed inset-0 bg-forest-950/50 z-40 hidden xl:hidden"></div>
+  <div id="mobile-menu" class="mobile-drawer fixed top-0 right-0 z-50 h-full w-[82%] max-w-sm bg-ivory-50 shadow-2xl xl:hidden p-7 overflow-y-auto">
+    <div class="flex justify-between items-center mb-10">
+      <p class="font-display text-2xl text-forest-900">Menu</p>
+      <button id="close-menu" aria-label="Close menu" class="text-forest-900">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>
-    <ul class="flex flex-col gap-5 text-slate-700 font-medium">
-      <li><a href="#home" class="mobile-nav-link block hover:text-amber-600">Home</a></li>
-      <li><a href="#prayer-times" class="mobile-nav-link block hover:text-amber-600">Prayer Times</a></li>
-      <li><a href="#about" class="mobile-nav-link block hover:text-amber-600">About</a></li>
-      <li><a href="#programs" class="mobile-nav-link block hover:text-amber-600">Programs</a></li>
-      <li><a href="#our-journey" class="mobile-nav-link block hover:text-amber-600">Our Journey</a></li>
-      <li><a href="#gallery" class="mobile-nav-link block hover:text-amber-600">Gallery</a></li>
-      <li><a href="#contact" class="mobile-nav-link block hover:text-amber-600">Contact</a></li>
-      <li><a href="#our-journey" class="mobile-nav-link mt-3 inline-block bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-5 py-2.5 rounded-full shadow transition text-center">Donate Now</a></li>
+    <ul class="flex flex-col gap-5 text-forest-800 font-medium text-lg">
+      <li><a href="#home" class="mobile-nav-link">Home</a></li>
+      <li><a href="#prayers" class="mobile-nav-link">Prayer Times</a></li>
+      <li><a href="#about" class="mobile-nav-link">About</a></li>
+      <li><a href="#programs" class="mobile-nav-link">Programs</a></li>
+      <li><a href="#services" class="mobile-nav-link">Services</a></li>
+      <li><a href="#journey" class="mobile-nav-link">Our Journey</a></li>
+      <li><a href="#leadership" class="mobile-nav-link">Leadership</a></li>
+      <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      <li><a href="#donate" class="mobile-nav-link mt-2 inline-block bg-gold-400 text-white px-5 py-3 text-center font-semibold">Donate Now</a></li>
     </ul>
   </div>
 </header>
 
-<!-- =============================== -->
-<!-- HERO SECTION (SWIPER SLIDER) -->
-<!-- =============================== -->
-<section id="home" class="relative">
-  <div class="swiper hero-swiper h-[600px] sm:h-[650px]">
-    <div class="swiper-wrapper">
-      <!-- Slide 1 -->
-      <div class="swiper-slide">
-        <div class="relative h-full flex items-center bg-gradient-to-br from-maroon-900 via-maroon-700 to-maroon-900">
-          <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_30%,#d4af37,transparent_35%),radial-gradient(circle_at_80%_70%,#d4af37,transparent_35%)]"></div>
-          <div class="relative max-w-4xl mx-auto px-6 text-center text-white">
-            <p class="text-amber-500 font-semibold tracking-widest uppercase mb-4">Assalamu Alaikum</p>
-            <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">Welcome to Durham Islamic Centre — Iqra Masjid</h1>
-            <p class="text-lg sm:text-xl text-white/90 mb-8">Open for daily Salah and community programs.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#prayer-times" class="bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">View Prayer Times</a>
-              <a href="#our-journey" class="border-2 border-white hover:bg-white hover:text-maroon-900 text-white font-semibold px-8 py-3 rounded-full transition">Donate Today</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 2 -->
-      <div class="swiper-slide">
-        <div class="relative h-full flex items-center bg-gradient-to-br from-maroon-700 via-maroon-900 to-black">
-          <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_70%_20%,#d4af37,transparent_35%),radial-gradient(circle_at_10%_80%,#d4af37,transparent_35%)]"></div>
-          <div class="relative max-w-4xl mx-auto px-6 text-center text-white">
-            <p class="text-amber-500 font-semibold tracking-widest uppercase mb-4">Education</p>
-            <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">Quran & Islamic Classes</h1>
-            <p class="text-lg sm:text-xl text-white/90 mb-8">Saturday & Quran Class Registration is now open.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="https://forms.gle/vqqySeJaaZkS8HJj8" target="_blank" rel="noopener" class="bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">Register</a>
-              <a href="https://forms.gle/6Ry9yxaQJUfrW2EG7" target="_blank" rel="noopener" class="border-2 border-white hover:bg-white hover:text-maroon-900 text-white font-semibold px-8 py-3 rounded-full transition">Register</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 3 -->
-      <div class="swiper-slide">
-        <div class="relative h-full flex items-center bg-gradient-to-br from-black via-maroon-900 to-maroon-700">
-          <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_70%,#d4af37,transparent_35%),radial-gradient(circle_at_90%_20%,#d4af37,transparent_35%)]"></div>
-          <div class="relative max-w-4xl mx-auto px-6 text-center text-white">
-            <p class="text-amber-500 font-semibold tracking-widest uppercase mb-4">Building Our Future</p>
-            <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">Support Our Masjid Journey</h1>
-            <p class="text-lg sm:text-xl text-white/90 mb-8">Help us complete parking, septic, lighting for occupancy permit.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#our-journey" class="bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">Support</a>
-              <a href="#our-journey" class="border-2 border-white hover:bg-white hover:text-maroon-900 text-white font-semibold px-8 py-3 rounded-full transition">Bank Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+<!-- HERO -->
+<section id="home" class="hero relative min-h-[88vh] flex items-end overflow-hidden bg-forest-950">
+  <div class="video-container">
+    <iframe
+      id="heroYt"
+      src="https://www.youtube.com/embed/Akl-c042Xow?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&cc_load_policy=0&showinfo=0&vq=hd1080&enablejsapi=1"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
   </div>
-</section>
+  <div class="video-shield" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="absolute inset-0 pattern-dark opacity-15 pointer-events-none"></div>
 
-<!-- =============================== -->
-<!-- PRAYER TIMINGS SECTION -->
-<!-- =============================== -->
-<section id="prayer-times" class="py-20 bg-stone-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-600 font-semibold tracking-widest uppercase mb-2">Salah Schedule</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-maroon-900">Daily Prayer Timings</h2>
-      <p class="text-slate-500 mt-3 max-w-2xl mx-auto">Live timings for Whitby, ON — updated automatically each day. Please confirm with the mosque for exact daily adjustments.</p>
-      <p id="prayer-date" class="mt-4 text-lg font-semibold text-maroon-900"></p>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-24 pb-16 sm:pb-20">
+    <p class="ornament text-gold-400 mb-5">Welcome home to Iqra Masjid</p>
+    <h1 class="font-display text-white text-[3rem] sm:text-6xl lg:text-7xl leading-[0.95] max-w-3xl">
+      Worship. Learn.<br />Connect. Grow Together.
+    </h1>
+    <p class="mt-6 max-w-xl text-ivory-100/85 text-lg leading-relaxed">
+      Serving Whitby and surrounding communities through daily Salah, Islamic education, youth programs and compassionate community service.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#prayers" class="inline-flex items-center justify-center min-h-[50px] px-7 bg-gold-400 hover:bg-gold-500 text-white font-semibold transition">View Prayer Times</a>
+      <a href="#donate" class="inline-flex items-center justify-center min-h-[50px] px-7 border border-ivory-100/70 text-white hover:bg-white hover:text-forest-900 font-semibold transition">Support the Masjid</a>
     </div>
 
-    <!-- Prayer Times (Dynamic via Aladhan API) -->
-    <div id="prayer-times-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
-      <div class="col-span-2 sm:col-span-3 lg:col-span-6 text-center text-slate-500 bg-white rounded-2xl shadow-lg border border-maroon-900/10 py-10">
-        Loading prayer times...
-      </div>
-    </div>
-
-    <!-- Jummah Schedules -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Iqra Masjid -->
-      <div class="bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-8">
-        <h3 class="font-display text-2xl font-bold text-maroon-900 mb-1">Iqra Masjid</h3>
-        <p class="text-amber-600 text-sm font-medium mb-6">Jumu'ah Salah Timings</p>
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span class="font-semibold text-slate-700">1st Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 12:30 PM &nbsp;•&nbsp; Iqamah: 1:00 PM</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span class="font-semibold text-slate-700">2nd Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 1:30 PM &nbsp;•&nbsp; Iqamah: 2:00 PM</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="font-semibold text-slate-700">3rd Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 3:40 PM &nbsp;•&nbsp; Iqamah: 4:00 PM</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- McKinney Centre -->
-      <div class="bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-8">
-        <h3 class="font-display text-2xl font-bold text-maroon-900 mb-1">McKinney Centre</h3>
-        <p class="text-amber-600 text-sm font-medium mb-6">Jumu'ah Salah Timings</p>
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span class="font-semibold text-slate-700">1st Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 12:00 PM &nbsp;•&nbsp; Iqamah: 12:30 PM</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span class="font-semibold text-slate-700">2nd Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 1:00 PM &nbsp;•&nbsp; Iqamah: 1:30 PM</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="font-semibold text-slate-700">3rd Jummah</span>
-            <span class="text-slate-500 text-sm">Bayan: 2:00 PM &nbsp;•&nbsp; Iqamah: 2:30 PM</span>
-          </div>
-        </div>
-      </div>
+    <div class="mt-12 max-w-sm bg-ivory-50/95 backdrop-blur border border-gold-400/40 p-5">
+      <p class="text-[11px] uppercase tracking-[0.22em] text-gold-600 font-semibold">Next Prayer</p>
+      <p id="nextPrayer" class="font-display text-3xl text-forest-900 mt-1">Loading…</p>
+      <p id="prayerNote" class="text-sm text-slate-500 mt-1">Whitby, Ontario</p>
     </div>
   </div>
 </section>
 
-<!-- =============================== -->
-<!-- ABOUT & MILESTONES -->
-<!-- =============================== -->
-<section id="about" class="py-20 bg-maroon-50">
+<!-- PRAYER TIMES -->
+<section id="prayers" class="py-20 sm:py-24 bg-ivory-50">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-600 font-semibold tracking-widest uppercase mb-2">About Us</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-maroon-900">Serving the Community Since 2012</h2>
-      <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Durham Islamic Centre is a CRA registered charity organization serving the Muslim community of Whitby and surrounding areas since 2012, providing a welcoming space for worship, education, and community connection.</p>
+    <div class="text-center reveal mb-14">
+      <p class="ornament justify-center text-gold-600 mb-3">Salah Schedule</p>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Daily Prayer Timings</h2>
+      <p class="mt-4 max-w-2xl mx-auto text-slate-600">Live timings for Whitby, ON — updated automatically each day. Please confirm with the mosque for exact daily adjustments.</p>
+      <p id="fullPrayerDate" class="mt-4 font-semibold text-forest-800">Loading today’s date…</p>
     </div>
 
-    <!-- Timeline -->
-    <h3 class="font-display text-2xl font-bold text-maroon-900 text-center mb-10">Our Milestones</h3>
-    <div class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-8 timeline-dot">
-      <div class="relative z-10 bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-6 text-center hover:-translate-y-2 transition duration-300">
-        <div class="mx-auto mb-4 h-14 w-14 rounded-full bg-maroon-900 text-amber-500 font-bold flex items-center justify-center text-lg">2012</div>
-        <h4 class="font-semibold text-maroon-900 mb-1">Organization Founded</h4>
-        <p class="text-sm text-slate-500">Durham Islamic Centre officially established as a registered charity.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">🌙</span>
+        <strong class="block text-forest-900 text-sm">Fajr</strong>
+        <b data-full-p="Fajr" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="relative z-10 bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-6 text-center hover:-translate-y-2 transition duration-300">
-        <div class="mx-auto mb-4 h-14 w-14 rounded-full bg-maroon-900 text-amber-500 font-bold flex items-center justify-center text-lg">2013</div>
-        <h4 class="font-semibold text-maroon-900 mb-1">Musallah Established</h4>
-        <p class="text-sm text-slate-500">First prayer space opened to serve the growing local community.</p>
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">🌅</span>
+        <strong class="block text-forest-900 text-sm">Sunrise</strong>
+        <b data-full-p="Sunrise" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="relative z-10 bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-6 text-center hover:-translate-y-2 transition duration-300">
-        <div class="mx-auto mb-4 h-14 w-14 rounded-full bg-maroon-900 text-amber-500 font-bold flex items-center justify-center text-lg">2017</div>
-        <h4 class="font-semibold text-maroon-900 mb-1">New Property Acquired</h4>
-        <p class="text-sm text-slate-500">Purchased the current property at Country Lane to build our future masjid.</p>
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">☀️</span>
+        <strong class="block text-forest-900 text-sm">Dhuhr</strong>
+        <b data-full-p="Dhuhr" class="block mt-2 text-gold-600 text-lg">--:--</b>
       </div>
-      <div class="relative z-10 bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-6 text-center hover:-translate-y-2 transition duration-300">
-        <div class="mx-auto mb-4 h-14 w-14 rounded-full bg-maroon-900 text-amber-500 font-bold flex items-center justify-center text-lg">2023</div>
-        <h4 class="font-semibold text-maroon-900 mb-1">Facility Opening</h4>
-        <p class="text-sm text-slate-500">Iqra Masjid opened its doors for daily Salah in January 2023.</p>
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">🌤️</span>
+        <strong class="block text-forest-900 text-sm">Asr</strong>
+        <b data-full-p="Asr" class="block mt-2 text-gold-600 text-lg">--:--</b>
+      </div>
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">🌆</span>
+        <strong class="block text-forest-900 text-sm">Maghrib</strong>
+        <b data-full-p="Maghrib" class="block mt-2 text-gold-600 text-lg">--:--</b>
+      </div>
+      <div class="arch-card bg-white border border-forest-900/10 px-3 pt-8 pb-6 text-center shadow-sm">
+        <span class="block text-2xl mb-2">✨</span>
+        <strong class="block text-forest-900 text-sm">Isha</strong>
+        <b data-full-p="Isha" class="block mt-2 text-gold-600 text-lg">--:--</b>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <article class="bg-white border border-forest-900/10 p-7 sm:p-8 shadow-sm">
+        <h3 class="font-display text-3xl text-forest-900">Iqra Masjid</h3>
+        <p class="text-gold-600 text-sm font-medium mb-5">Jumu’ah Salah Timings</p>
+        <div class="space-y-4 text-sm sm:text-base">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>1st Jummah</strong><span class="text-slate-500">Bayan: 12:30 PM · Iqamah: 1:00 PM</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>2nd Jummah</strong><span class="text-slate-500">Bayan: 1:30 PM · Iqamah: 2:00 PM</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1"><strong>3rd Jummah</strong><span class="text-slate-500">Bayan: 3:40 PM · Iqamah: 4:00 PM</span></div>
+        </div>
+      </article>
+      <article class="bg-white border border-forest-900/10 p-7 sm:p-8 shadow-sm">
+        <h3 class="font-display text-3xl text-forest-900">McKinney Centre</h3>
+        <p class="text-gold-600 text-sm font-medium mb-5">Jumu’ah Salah Timings</p>
+        <div class="space-y-4 text-sm sm:text-base">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>1st Jummah</strong><span class="text-slate-500">Bayan: 12:00 PM · Iqamah: 12:30 PM</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>2nd Jummah</strong><span class="text-slate-500">Bayan: 1:00 PM · Iqamah: 1:30 PM</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1"><strong>3rd Jummah</strong><span class="text-slate-500">Bayan: 2:00 PM · Iqamah: 2:30 PM</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs" class="py-20 sm:py-24 bg-ivory-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="ornament text-gold-600 mb-3">Programs</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Learn, grow and connect</h2>
+      </div>
+      <p class="max-w-md text-slate-600">Faith-centred programs for children, youth, adults and families.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+        <div class="relative h-56 overflow-hidden">
+          <img src="assets/images/gallery-4.jpg" alt="Children learning Quran" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+          <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">01</span>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-3xl text-forest-900 mb-3">Quran Classes</h3>
+          <p class="text-slate-600 mb-6">Structured learning focused on Tajweed, memorization and understanding.</p>
+          <a href="https://forms.gle/vqqySeJaaZkS8HJj8" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600 transition">Register now →</a>
+        </div>
+      </article>
+      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+        <div class="relative h-56 overflow-hidden">
+          <img src="assets/images/gallery-1.jpg" alt="Saturday Islamic School" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+          <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">02</span>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-3xl text-forest-900 mb-3">Saturday Islamic School</h3>
+          <p class="text-slate-600 mb-6">Aqeedah, Seerah, Islamic history and Arabic language basics.</p>
+          <a href="https://forms.gle/6Ry9yxaQJUfrW2EG7" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600 transition">Register now →</a>
+        </div>
+      </article>
+      <article class="group bg-white overflow-hidden border border-forest-900/10 shadow-sm hover:-translate-y-1.5 transition duration-300">
+        <div class="relative h-56 overflow-hidden">
+          <img src="assets/images/gallery-5.jpg" alt="Youth and family programs" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+          <span class="absolute top-4 left-4 font-display text-ivory-50 text-3xl">03</span>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-3xl text-forest-900 mb-3">Youth &amp; Family Programs</h3>
+          <p class="text-slate-600 mb-6">Activities that strengthen faith, friendship and Muslim identity.</p>
+          <a href="#contact" class="text-forest-800 font-semibold hover:text-gold-600 transition">Ask about programs →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="relative py-20 sm:py-24 bg-forest-900 text-ivory-50 overflow-hidden">
+  <div class="absolute inset-0 pattern-dark opacity-50"></div>
+  <div class="relative max-w-7xl mx-auto px-4">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="ornament text-gold-400 mb-3">Community support</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white">Services for every family</h2>
+      </div>
+      <p class="max-w-md text-ivory-200/80">Religious and practical support when the community needs it.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-3xl mb-4">💍</p>
+        <h3 class="font-display text-3xl mb-3">Nikah</h3>
+        <p class="text-ivory-200/80 leading-relaxed">Islamic marriage ceremony guidance and coordination.</p>
+      </article>
+      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-3xl mb-4">🤲</p>
+        <h3 class="font-display text-3xl mb-3">Janazah</h3>
+        <p class="text-ivory-200/80 leading-relaxed">Religious guidance and family support during difficult times.</p>
+      </article>
+      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-3xl mb-4">🧭</p>
+        <h3 class="font-display text-3xl mb-3">Religious Guidance</h3>
+        <p class="text-ivory-200/80 leading-relaxed">Support with faith, family and everyday Islamic questions.</p>
+      </article>
+      <article class="border border-white/15 bg-white/5 p-7 hover:bg-white/10 transition">
+        <p class="text-3xl mb-4">🤝</p>
+        <h3 class="font-display text-3xl mb-3">Outreach</h3>
+        <p class="text-ivory-200/80 leading-relaxed">Building bridges and serving neighbours across Durham Region.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-20 sm:py-24 bg-ivory-50">
+  <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div class="relative reveal">
+      <div class="relative frame-gold overflow-hidden bg-forest-900 aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]">
+        <div class="about-slide absolute inset-0 opacity-0 transition-opacity duration-700" data-title="A welcoming place for Salah" data-caption="Iqra Masjid prayer hall">
+          <img src="assets/images/gallery-4.jpg" alt="Prayer hall inside Iqra Masjid" class="w-full h-full object-cover" />
+        </div>
+        <div class="about-slide absolute inset-0 opacity-0 transition-opacity duration-700" data-title="Growing together in faith" data-caption="Serving families across Durham Region">
+          <img src="assets/images/gallery-1.jpg" alt="Durham Islamic Centre community facility" class="w-full h-full object-cover" />
+        </div>
+        <div class="about-slide absolute inset-0 opacity-0 transition-opacity duration-700" data-title="A permanent home for our community" data-caption="Built through the generosity of our community">
+          <img src="assets/images/gallery-2.jpg" alt="Iqra Masjid property and grounds" class="w-full h-full object-cover" />
+        </div>
+        <div class="about-slide absolute inset-0 opacity-0 transition-opacity duration-700" data-title="Education for every generation" data-caption="Quran, Islamic learning and youth programs">
+          <img src="assets/images/gallery-3.jpg" alt="Islamic education and community space" class="w-full h-full object-cover" />
+        </div>
+        <div class="about-slide absolute inset-0 opacity-0 transition-opacity duration-700" data-title="Faith, service and connection" data-caption="Welcoming Whitby and surrounding communities">
+          <img src="assets/images/gallery-5.jpg" alt="Community gathering at Durham Islamic Centre" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-forest-950/85 to-transparent text-white">
+          <strong id="aboutTitle" class="font-display block text-2xl sm:text-3xl">A welcoming place for Salah</strong>
+          <span id="aboutText" class="text-sm text-ivory-200">Iqra Masjid prayer hall</span>
+        </div>
+        <div class="absolute top-4 right-4 flex gap-2">
+          <button id="aboutPrev" type="button" class="h-10 w-10 bg-forest-950/55 text-white border border-white/40 hover:bg-gold-400 hover:text-white hover:border-gold-400 transition" aria-label="Previous photo">←</button>
+          <button id="aboutNext" type="button" class="h-10 w-10 bg-forest-950/55 text-white border border-white/40 hover:bg-gold-400 hover:text-white hover:border-gold-400 transition" aria-label="Next photo">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="ornament text-gold-600 mb-3">About us</p>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900 leading-[0.95]">Serving the community since 2012</h2>
+      <p class="mt-6 text-slate-600 leading-relaxed text-lg">Durham Islamic Centre is a CRA registered charity serving Whitby and surrounding areas with a welcoming place for worship, education and community connection.</p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4">
+        <div class="border-l-2 border-gold-400 bg-white pl-5 pr-4 py-4">
+          <b class="block font-display text-3xl text-forest-900">2012</b>
+          <span class="text-slate-600">Organization founded</span>
+        </div>
+        <div class="border-l-2 border-gold-400 bg-white pl-5 pr-4 py-4">
+          <b class="block font-display text-3xl text-forest-900">2013</b>
+          <span class="text-slate-600">First musallah established</span>
+        </div>
+        <div class="border-l-2 border-gold-400 bg-white pl-5 pr-4 py-4">
+          <b class="block font-display text-3xl text-forest-900">2017</b>
+          <span class="text-slate-600">Country Lane property acquired</span>
+        </div>
+        <div class="border-l-2 border-gold-400 bg-white pl-5 pr-4 py-4">
+          <b class="block font-display text-3xl text-forest-900">2023</b>
+          <span class="text-slate-600">Iqra Masjid opened</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============================== -->
-<!-- EDUCATION & PROGRAMS -->
-<!-- =============================== -->
-<section id="programs" class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-600 font-semibold tracking-widest uppercase mb-2">Education & Programs</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-maroon-900">Learn, Grow, and Connect</h2>
+<!-- JOURNEY -->
+<section id="journey" class="relative py-20 sm:py-24 bg-forest-800 text-white overflow-hidden">
+  <div class="absolute inset-0 pattern-dark"></div>
+  <div class="relative max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14 reveal">
+      <p class="ornament justify-center text-gold-400 mb-3">Our Journey</p>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl">Our Journey</h2>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- Card 1 -->
-      <div class="group bg-stone-50 rounded-2xl p-8 border border-slate-100 shadow hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-        <div class="h-16 w-16 rounded-2xl bg-maroon-900 text-amber-500 flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-maroon-900 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-        </div>
-        <h3 class="font-display text-xl font-bold text-maroon-900 mb-3">Quran Classes</h3>
-        <p class="text-slate-600 mb-6">Structured Quran learning classes for children and adults, focusing on Tajweed, memorization, and understanding.</p>
-        <a href="https://forms.gle/vqqySeJaaZkS8HJj8" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-maroon-900 font-semibold group-hover:text-amber-600 transition">
-          Register Now
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-        </a>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="group bg-stone-50 rounded-2xl p-8 border border-slate-100 shadow hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-        <div class="h-16 w-16 rounded-2xl bg-maroon-900 text-amber-500 flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-maroon-900 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443" /></svg>
-        </div>
-        <h3 class="font-display text-xl font-bold text-maroon-900 mb-3">Saturday Islamic School</h3>
-        <p class="text-slate-600 mb-6">Weekend Islamic studies program covering Aqeedah, Seerah, Islamic history, and Arabic language basics.</p>
-        <a href="https://forms.gle/6Ry9yxaQJUfrW2EG7" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-maroon-900 font-semibold group-hover:text-amber-600 transition">
-          Register Now
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-        </a>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="group bg-stone-50 rounded-2xl p-8 border border-slate-100 shadow hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-        <div class="h-16 w-16 rounded-2xl bg-maroon-900 text-amber-500 flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-maroon-900 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
-        </div>
-        <h3 class="font-display text-xl font-bold text-maroon-900 mb-3">Community Services</h3>
-        <p class="text-slate-600 mb-6">Youth and family programs designed to strengthen community bonds. For inquiries, call (289) 312-1421.</p>
-        <a href="tel:+12893121421" class="inline-flex items-center gap-2 text-maroon-900 font-semibold group-hover:text-amber-600 transition">
-          Contact Us
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =============================== -->
-<!-- OUR JOURNEY / FUNDRAISING -->
-<!-- =============================== -->
-<section id="our-journey" class="py-20 bg-maroon-900 text-white">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-500 font-semibold tracking-widest uppercase mb-2">Our Journey</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold">Our Journey</h2>
-    </div>
-
-    <!-- Journey Overview -->
     <div class="grid lg:grid-cols-2 gap-10 items-center mb-16">
       <div>
-        <p class="text-white/80 leading-relaxed">We're in the final stretch, the finish line is just around the bend. Since purchasing the property in 2017, we've been working hard to get this masjid ready for the community. We are almost there! We have to get the parking, septic and fire hydrant done before we get an occupancy permit from the town and we need your help.</p>
-        <div class="flex flex-wrap gap-3 mt-6 text-sm">
-          <span class="bg-white/10 px-4 py-2 rounded-full">🅿️ Parking Lot</span>
-          <span class="bg-white/10 px-4 py-2 rounded-full">🚿 Septic System</span>
-          <span class="bg-white/10 px-4 py-2 rounded-full">🚒 Fire Hydrant</span>
-          <span class="bg-white/10 px-4 py-2 rounded-full">💡 Entrance Lighting</span>
+        <p class="text-ivory-100/90 leading-relaxed text-lg">We're in the final stretch, the finish line is just around the bend. Since purchasing the property in 2017, we've been working hard to get this masjid ready for the community. We are almost there! We have to get the parking, septic and fire hydrant done before we get an occupancy permit from the town and we need your help.</p>
+        <div class="flex flex-wrap gap-3 mt-7 text-sm">
+          <span class="bg-white/10 border border-white/10 px-4 py-2">🅿️ Parking Lot</span>
+          <span class="bg-white/10 border border-white/10 px-4 py-2">🚿 Septic System</span>
+          <span class="bg-white/10 border border-white/10 px-4 py-2">🚒 Fire Hydrant</span>
+          <span class="bg-white/10 border border-white/10 px-4 py-2">💡 Entrance Lighting</span>
         </div>
       </div>
-      <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-        <img src="assets/images/campaign-recurring.jpg" alt="Durham Islamic Centre - Answer the Call of Allah campaign" class="w-full h-full object-cover" loading="lazy" />
-      </div>
+      <img src="assets/images/campaign-recurring.jpg" alt="Durham Islamic Centre Answer the Call of Allah campaign poster" class="w-full max-w-md lg:max-w-none mx-auto shadow-2xl border border-gold-400/30" />
     </div>
 
-    <!-- Campaigns -->
-    <div class="grid md:grid-cols-3 gap-8 mb-16">
-      <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:-translate-y-1 transition duration-300">
-        <a href="campaigns/parking-lot" class="block aspect-[4/3] overflow-hidden">
-          <img src="assets/images/gallery-3.jpg" alt="Parking Lot, Lighting & Entrance Gate" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
+    <div class="grid md:grid-cols-3 gap-6 mb-14">
+      <article class="bg-white/5 border border-white/10 overflow-hidden hover:-translate-y-1 transition">
+        <a href="campaigns/parking-lot" class="block h-52 overflow-hidden">
+          <img src="assets/images/gallery-2.jpg" alt="Parking Lot, Lighting & Entrance Gate" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
         </a>
         <div class="p-6">
-          <span class="inline-block text-xs font-semibold uppercase tracking-wide bg-white/10 text-amber-500 px-3 py-1 rounded-full mb-3">Campaign has ended</span>
-          <h3 class="font-display text-xl font-bold mb-2">
-            <a href="campaigns/parking-lot" class="hover:text-amber-500 transition">Parking Lot, Lighting & Entrance Gate</a>
-          </h3>
-          <p class="text-white/70 text-sm">Help us finish the parking lot, entrance gate, and lighting needed to secure our occupancy permit.</p>
+          <span class="inline-block text-[11px] font-semibold uppercase tracking-wider bg-gold-400/15 text-gold-300 px-3 py-1 mb-3">Campaign has ended</span>
+          <h3 class="font-display text-2xl mb-2"><a href="campaigns/parking-lot" class="hover:text-gold-400 transition">Parking Lot, Lighting &amp; Entrance Gate</a></h3>
+          <p class="text-ivory-200/75 text-sm">Help us finish the parking lot, entrance gate, and lighting needed to secure our occupancy permit.</p>
         </div>
-      </div>
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:-translate-y-1 transition duration-300">
-        <a href="campaigns/food-for-refugees" class="block aspect-[4/3] overflow-hidden">
-          <img src="assets/images/gallery-4.jpg" alt="Food For Refugees" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
+      </article>
+      <article class="bg-white/5 border border-white/10 overflow-hidden hover:-translate-y-1 transition">
+        <a href="campaigns/food-for-refugees" class="block h-52 overflow-hidden">
+          <img src="assets/images/gallery-4.jpg" alt="Food For Refugees" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
         </a>
         <div class="p-6">
-          <span class="inline-block text-xs font-semibold uppercase tracking-wide bg-white/10 text-amber-500 px-3 py-1 rounded-full mb-3">Campaign has ended</span>
-          <h3 class="font-display text-xl font-bold mb-2">
-            <a href="campaigns/food-for-refugees" class="hover:text-amber-500 transition">Food For Refugees</a>
-          </h3>
-          <p class="text-white/70 text-sm">Providing meals and essential support to refugee families in our community.</p>
+          <span class="inline-block text-[11px] font-semibold uppercase tracking-wider bg-gold-400/15 text-gold-300 px-3 py-1 mb-3">Campaign has ended</span>
+          <h3 class="font-display text-2xl mb-2"><a href="campaigns/food-for-refugees" class="hover:text-gold-400 transition">Food For Refugees</a></h3>
+          <p class="text-ivory-200/75 text-sm">Providing meals and essential support to refugee families in our community.</p>
         </div>
-      </div>
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:-translate-y-1 transition duration-300">
-        <a href="campaigns/give-shelter-homes" class="block aspect-[4/3] overflow-hidden">
-          <img src="assets/images/gallery-6.jpg" alt="Give Shelter Homes" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
+      </article>
+      <article class="bg-white/5 border border-white/10 overflow-hidden hover:-translate-y-1 transition">
+        <a href="campaigns/give-shelter-homes" class="block h-52 overflow-hidden">
+          <img src="assets/images/gallery-3.jpg" alt="Give Shelter Homes" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
         </a>
         <div class="p-6">
-          <span class="inline-block text-xs font-semibold uppercase tracking-wide bg-white/10 text-amber-500 px-3 py-1 rounded-full mb-3">Campaign has ended</span>
-          <h3 class="font-display text-xl font-bold mb-2">
-            <a href="campaigns/give-shelter-homes" class="hover:text-amber-500 transition">Give Shelter Homes</a>
-          </h3>
-          <p class="text-white/70 text-sm">Helping provide shelter and housing support for families in need.</p>
+          <span class="inline-block text-[11px] font-semibold uppercase tracking-wider bg-gold-400/15 text-gold-300 px-3 py-1 mb-3">Campaign has ended</span>
+          <h3 class="font-display text-2xl mb-2"><a href="campaigns/give-shelter-homes" class="hover:text-gold-400 transition">Give Shelter Homes</a></h3>
+          <p class="text-ivory-200/75 text-sm">Helping provide shelter and housing support for families in need.</p>
         </div>
-      </div>
+      </article>
     </div>
 
-    <!-- Donation Info Cards -->
-    <div class="grid lg:grid-cols-2 gap-8">
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur">
-        <h3 class="font-display text-xl font-bold text-amber-500 mb-4">Direct Bank Deposit</h3>
-        <dl class="space-y-3 text-white/90 text-sm sm:text-base">
-          <div class="flex justify-between border-b border-white/10 pb-2"><dt class="text-white/60">Bank</dt><dd class="font-semibold">TD Canada Trust</dd></div>
-          <div class="flex justify-between border-b border-white/10 pb-2"><dt class="text-white/60">Account Name</dt><dd class="font-semibold">Durham Islamic Centre</dd></div>
-          <div class="flex justify-between border-b border-white/10 pb-2"><dt class="text-white/60">Account No.</dt><dd class="font-semibold">18075006018</dd></div>
-          <div class="flex justify-between border-b border-white/10 pb-2"><dt class="text-white/60">Branch No.</dt><dd class="font-semibold">18072</dd></div>
-          <div class="flex justify-between"><dt class="text-white/60">Institution No.</dt><dd class="font-semibold">004</dd></div>
+    <div id="donate" class="grid lg:grid-cols-2 gap-6 scroll-mt-28">
+      <div class="bg-ivory-50 text-forest-900 p-8">
+        <h3 class="font-display text-3xl text-forest-900 mb-6">Direct Bank Deposit</h3>
+        <dl class="space-y-3">
+          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Bank</dt><dd class="font-semibold">TD Canada Trust</dd></div>
+          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Account Name</dt><dd class="font-semibold">Durham Islamic Centre</dd></div>
+          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Account No.</dt><dd class="font-semibold">18075006018</dd></div>
+          <div class="flex justify-between border-b border-ivory-200 pb-2"><dt class="text-slate-500">Branch No.</dt><dd class="font-semibold">18072</dd></div>
+          <div class="flex justify-between"><dt class="text-slate-500">Institution No.</dt><dd class="font-semibold">004</dd></div>
         </dl>
       </div>
-
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur flex flex-col justify-between">
-        <div>
-          <h3 class="font-display text-xl font-bold text-amber-500 mb-4">E-Transfer</h3>
-          <p class="text-white/90 mb-2">Send your donation directly via Interac e-Transfer to:</p>
-          <p class="text-lg sm:text-xl font-semibold bg-white/10 rounded-lg px-4 py-3 inline-block break-all">Donation@durhamislamiccentre.ca</p>
-          <p class="text-white/60 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
-        </div>
-        <a href="#contact" class="mt-6 inline-block text-center bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">Donate Now</a>
+      <div class="bg-ivory-50 text-forest-900 p-8 flex flex-col">
+        <h3 class="font-display text-3xl text-forest-900 mb-4">E-Transfer</h3>
+        <p class="text-slate-600 mb-3">Send your donation directly via Interac e-Transfer to:</p>
+        <p class="font-semibold text-lg bg-ivory-100 px-4 py-3 break-all">Donation@durhamislamiccentre.ca</p>
+        <p class="text-slate-500 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
+        <a href="#contact" class="mt-auto pt-6 inline-flex justify-center bg-gold-400 hover:bg-gold-500 text-white font-semibold px-6 py-3 transition">Donate Now</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============================== -->
-<!-- PHOTO GALLERY -->
-<!-- =============================== -->
-<section id="gallery" class="py-20 bg-stone-50">
+<!-- LEADERSHIP -->
+<section id="leadership" class="py-20 sm:py-24 bg-ivory-50">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-600 font-semibold tracking-widest uppercase mb-2">Gallery</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-maroon-900">Community & Building Progress</h2>
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="ornament text-gold-600 mb-3">Serving with Amanah</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Our Leadership Team</h2>
+      </div>
+      <p class="max-w-md text-slate-600">Community leaders committed to faith, unity, transparency, and service for the sake of Allah.</p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(0)">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-ivory-200 border border-ivory-200">
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">TV</div>
+        <h3 class="font-display text-2xl text-forest-900">Tanvir Vahidy</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">President</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Lead with amanah and justice, keeping every decision accountable to Allah and fair to the community.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">AA</div>
+        <h3 class="font-display text-2xl text-forest-900">Arshad Ali</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">Vice President</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Strengthen unity and cooperation, helping the team serve together with respect and a shared Islamic purpose.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">AS</div>
+        <h3 class="font-display text-2xl text-forest-900">Amir Sualeh</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">General Secretary</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Maintain truthful communication and dependable records so community affairs are handled with trust and transparency.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">WB</div>
+        <h3 class="font-display text-2xl text-forest-900">Waseem Bhutta</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">Treasurer</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Protect community funds as an amanah, managing every donation carefully, honestly, and for maximum benefit.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">ZC</div>
+        <h3 class="font-display text-2xl text-forest-900">Zafarullah Chaudhery</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">Director</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Promote beneficial education and wise guidance that strengthen faith, families, and future generations.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">AA</div>
+        <h3 class="font-display text-2xl text-forest-900">Aijaz Ahmed</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">Director</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Serve with compassion by supporting youth, seniors, newcomers, and families during times of need.</p>
+      </article>
+      <article class="bg-ivory-50 p-6 hover:bg-white transition sm:col-span-2 xl:col-span-1">
+        <div class="h-12 w-12 rounded-full border border-gold-400 text-forest-800 font-display text-lg grid place-items-center mb-4">JA</div>
+        <h3 class="font-display text-2xl text-forest-900">Jamil Ahmed</h3>
+        <span class="block text-[11px] uppercase tracking-[0.16em] text-gold-600 font-semibold mt-1">Director</span>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">Build outreach and partnerships that spread goodness, welcome neighbours, and strengthen the wider community.</p>
+      </article>
+    </div>
+    <p class="mt-6 text-sm text-slate-500">Visions are inspired by Qur’anic principles of trust, justice, unity, cooperation, and mutual care.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-20 sm:py-24 bg-ivory-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="ornament text-gold-600 mb-3">Gallery</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Community &amp; building progress</h2>
+      </div>
+      <p class="max-w-md text-slate-600">Moments from the journey of Durham Islamic Centre and Iqra Masjid.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      <button type="button" class="gallery-tile relative overflow-hidden aspect-[4/5] md:aspect-square" onclick="openLightbox(0)">
         <img src="assets/images/gallery-1.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(1)">
-        <img src="assets/images/gallery-2.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(2)">
-        <img src="assets/images/gallery-3.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(3)">
-        <img src="assets/images/gallery-4.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(4)">
-        <img src="assets/images/gallery-5.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
-      <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg aspect-square cursor-pointer" onclick="openLightbox(5)">
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(1)">
+        <img src="assets/images/gallery-2.jpg" alt="Durham Islamic Centre grounds" class="w-full h-full object-cover" loading="lazy" />
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(2)">
+        <img src="assets/images/gallery-3.jpg" alt="Masjid entrance and progress" class="w-full h-full object-cover" loading="lazy" />
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(3)">
+        <img src="assets/images/gallery-4.jpg" alt="Iqra Masjid prayer hall" class="w-full h-full object-cover" loading="lazy" />
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden aspect-square" onclick="openLightbox(4)">
+        <img src="assets/images/gallery-5.jpg" alt="Community gathering" class="w-full h-full object-cover" loading="lazy" />
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden col-span-2 md:col-span-3 aspect-[16/7]" onclick="openLightbox(5)">
         <img src="assets/images/gallery-6.jpg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
-      </div>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- =============================== -->
-<!-- LIGHTBOX MODAL -->
-<!-- =============================== -->
-<div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90" onclick="closeLightbox(event)">
-  <button type="button" onclick="closeLightbox(event)" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white hover:text-amber-500 transition text-4xl leading-none" aria-label="Close">&times;</button>
-
-  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(-1)" class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white hover:text-amber-500 transition text-4xl sm:text-5xl leading-none px-2" aria-label="Previous image">&#8592;</button>
-
-  <img id="lightbox-img" src="" alt="Gallery image" class="max-h-[85vh] max-w-[90vw] rounded-xl shadow-2xl" onclick="event.stopPropagation()" />
-
-  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(1)" class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white hover:text-amber-500 transition text-4xl sm:text-5xl leading-none px-2" aria-label="Next image">&#8594;</button>
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center bg-forest-950/92" onclick="closeLightbox()">
+  <button type="button" onclick="closeLightbox()" class="absolute top-5 right-5 text-white hover:text-gold-400 text-4xl leading-none" aria-label="Close">&times;</button>
+  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(-1)" class="absolute left-3 sm:left-6 text-white hover:text-gold-400 text-4xl" aria-label="Previous">←</button>
+  <img id="lightbox-img" src="" alt="Gallery image" class="max-h-[86vh] max-w-[90vw] shadow-2xl" onclick="event.stopPropagation()" />
+  <button type="button" onclick="event.stopPropagation(); changeLightboxImage(1)" class="absolute right-3 sm:right-6 text-white hover:text-gold-400 text-4xl" aria-label="Next">→</button>
 </div>
 
-<!-- =============================== -->
-<!-- CONTACT & LOCATION -->
-<!-- =============================== -->
-<section id="contact" class="py-20 bg-white">
+<!-- CONTACT -->
+<section id="contact" class="py-20 sm:py-24 bg-ivory-50">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-14">
-      <p class="text-amber-600 font-semibold tracking-widest uppercase mb-2">Get In Touch</p>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-maroon-900">Contact & Location</h2>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-10">
-      <!-- Contact Form -->
-      <form id="contact-form" class="bg-stone-50 rounded-2xl shadow-lg border border-slate-100 p-8 space-y-5">
-        <div>
-          <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Name</label>
-          <input type="text" id="name" name="name" required placeholder="Your full name" class="w-full rounded-lg border-slate-300 focus:border-maroon-700 focus:ring-maroon-700 shadow-sm px-4 py-2.5" />
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" required placeholder="you@example.com" class="w-full rounded-lg border-slate-300 focus:border-maroon-700 focus:ring-maroon-700 shadow-sm px-4 py-2.5" />
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
-          <textarea id="message" name="message" rows="5" required placeholder="How can we help you?" class="w-full rounded-lg border-slate-300 focus:border-maroon-700 focus:ring-maroon-700 shadow-sm px-4 py-2.5"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-maroon-900 hover:bg-maroon-700 text-white font-semibold py-3 rounded-lg shadow-lg transition">Submit Message</button>
-      </form>
-
-      <!-- Map + WhatsApp -->
-      <div class="flex flex-col gap-6">
-        <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100 h-64 sm:h-72">
-          <iframe
-            title="Durham Islamic Centre Location"
-            src="https://www.google.com/maps?q=43.89456,-79.14123&output=embed"
-            class="w-full h-full border-0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-
-        <div class="bg-maroon-50 rounded-2xl shadow border border-maroon-900/10 p-8 flex flex-col items-center text-center col-span-1">
-          <h4 class="text-2xl font-bold text-maroon-900 mb-1">📱 Join Our WhatsApp Group</h4>
-          <p class="text-sm text-slate-600 mb-6">Stay connected with our community for updates and announcements.</p>
-          <img src="assets/images/whatsapp-qr.jpg" alt="WhatsApp Group QR Code" class="w-72 h-72 rounded-2xl border-4 border-rose-900 shadow-lg object-cover" />
-          <p class="mt-4 text-slate-700 font-medium">Scan the QR code with your phone</p>
-          <a href="https://chat.whatsapp.com/YOUR_WHATSAPP_LINK" target="_blank" rel="noopener" class="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-maroon-900 font-semibold px-8 py-3 rounded-full shadow-lg transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.478 2 2 6.478 2 12c0 1.85.502 3.663 1.454 5.243L2 22l4.858-1.436A9.96 9.96 0 0012.004 22C17.53 22 22 17.522 22 12S17.53 2 12.004 2zm0 18.09a8.05 8.05 0 01-4.31-1.24l-.309-.184-2.885.854.87-2.815-.2-.29a8.06 8.06 0 01-1.256-4.325c0-4.463 3.632-8.09 8.09-8.09 4.463 0 8.09 3.627 8.09 8.09 0 4.462-3.627 8.09-8.09 8.09z"/></svg>
-            Join WhatsApp Group
-          </a>
-        </div>
-
-        <div class="bg-stone-50 rounded-2xl shadow border border-slate-100 p-6 space-y-3 text-slate-700">
-          <p class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-maroon-900" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /></svg> 4618 Country Lane, Whitby, ON L1P 1V7</p>
-          <p class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-maroon-900" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg> (289) 312-1421</p>
-          <p class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-maroon-900" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg> info@durhamislamiccentre.ca</p>
-        </div>
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="ornament text-gold-600 mb-3">Get in touch</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Visit Iqra Masjid</h2>
       </div>
+      <p class="max-w-md text-slate-600">Find the masjid on the live map, get directions, or join the official community WhatsApp group.</p>
     </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 mb-8">
+      <article class="bg-white border border-forest-900/10 p-8">
+        <h3 class="font-display text-3xl text-forest-900 mb-4">Durham Islamic Centre — Iqra Masjid</h3>
+        <p class="text-slate-600 leading-relaxed">4618 Country Lane<br />Whitby, ON L1P 1V7</p>
+        <p class="mt-4"><a href="tel:+12893121421" class="hover:text-gold-600">(289) 312-1421</a><br /><a href="mailto:info@durhamislamiccentre.ca" class="hover:text-gold-600">info@durhamislamiccentre.ca</a></p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=4618+Country+Lane+Whitby+ON+L1P+1V7" target="_blank" rel="noopener" class="mt-6 inline-flex bg-forest-900 hover:bg-forest-800 text-white font-semibold px-6 py-3 transition">Get Directions</a>
+      </article>
+
+      <article class="bg-ivory-100 border border-forest-900/10 p-8 text-center">
+        <h3 class="font-display text-3xl text-forest-900 mb-2">Join Our WhatsApp Group</h3>
+        <p class="text-slate-600 mb-5">Stay connected with community updates, programs and important announcements.</p>
+        <a href="https://chat.whatsapp.com/77SDABOhIpE8pA3n49bSR5" target="_blank" rel="noopener">
+          <img src="assets/images/whatsapp-qr.jpg" alt="QR code for the Durham Islamic Centre WhatsApp group" class="w-56 h-56 mx-auto object-cover border-4 border-forest-800 bg-white p-2" />
+        </a>
+        <p class="mt-3 font-medium text-forest-900">Scan the QR code with your phone</p>
+        <a href="https://chat.whatsapp.com/77SDABOhIpE8pA3n49bSR5" target="_blank" rel="noopener" class="mt-5 inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold px-6 py-3 transition">Open WhatsApp Group</a>
+      </article>
+    </div>
+
+    <div class="mb-8">
+      <div class="flex items-end justify-between gap-4 mb-4">
+        <h3 class="font-display text-3xl text-forest-900">Masjid Location</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=4618+Country+Lane+Whitby+ON+L1P+1V7" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600">Open larger map →</a>
+      </div>
+      <iframe
+        title="Google Map showing Durham Islamic Centre at 4618 Country Lane, Whitby"
+        src="https://www.google.com/maps?q=4618%20Country%20Lane%2C%20Whitby%2C%20ON%20L1P%201V7&z=15&output=embed"
+        class="w-full h-[360px] sm:h-[430px] border-0 shadow-lg"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <form id="contact-form" class="max-w-3xl mx-auto bg-white border border-forest-900/10 p-8 space-y-5">
+      <h3 class="font-display text-3xl text-forest-900">Send a message</h3>
+      <div>
+        <label for="name" class="block text-sm font-medium mb-1">Name</label>
+        <input type="text" id="name" name="name" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" id="email" name="email" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700" />
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium mb-1">Message</label>
+        <textarea id="message" name="message" rows="5" required class="w-full border border-ivory-200 px-4 py-3 focus:outline-none focus:border-forest-700"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-forest-900 hover:bg-forest-800 text-white font-semibold py-3.5 transition">Submit Message</button>
+    </form>
   </div>
 </section>
 
-<!-- =============================== -->
 <!-- FOOTER -->
-<!-- =============================== -->
-<footer class="bg-maroon-900 text-white pt-16 pb-8">
-  <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+<footer class="bg-forest-950 text-ivory-200 pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
     <div>
-      <div class="flex items-center gap-3 mb-4">
-        <span class="bg-white rounded-lg p-1.5 inline-flex items-center">
-          <img src="assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-8 w-auto" />
-        </span>
-        <p class="font-display font-bold text-lg text-white">Durham Islamic Centre</p>
-      </div>
-      <p class="text-white/70 text-sm leading-relaxed">A CRA registered charity organization serving the Muslim community of Whitby and surrounding areas since 2012.</p>
+      <span class="inline-block bg-white p-2 mb-4">
+        <img src="assets/images/logo-dic-web.png" alt="Durham Islamic Centre logo" class="h-10 w-auto" />
+      </span>
+      <p class="text-sm leading-relaxed text-ivory-200/70">A CRA registered charity serving Whitby and surrounding areas since 2012.</p>
     </div>
-
     <div>
-      <h4 class="font-semibold text-white mb-4">Quick Links</h4>
-      <ul class="space-y-2 text-sm text-white/70">
-        <li><a href="#home" class="hover:text-amber-500 transition">Home</a></li>
-        <li><a href="#prayer-times" class="hover:text-amber-500 transition">Prayer Times</a></li>
-        <li><a href="#about" class="hover:text-amber-500 transition">About</a></li>
-        <li><a href="#programs" class="hover:text-amber-500 transition">Programs</a></li>
-        <li><a href="#our-journey" class="hover:text-amber-500 transition">Our Journey</a></li>
-        <li><a href="#gallery" class="hover:text-amber-500 transition">Gallery</a></li>
-        <li><a href="#contact" class="hover:text-amber-500 transition">Contact</a></li>
+      <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-2 text-sm text-ivory-200/70">
+        <li><a href="#prayers" class="hover:text-gold-400">Prayer Times</a></li>
+        <li><a href="#programs" class="hover:text-gold-400">Programs</a></li>
+        <li><a href="#services" class="hover:text-gold-400">Services</a></li>
+        <li><a href="#journey" class="hover:text-gold-400">Our Journey</a></li>
+        <li><a href="#leadership" class="hover:text-gold-400">Leadership</a></li>
+        <li><a href="#gallery" class="hover:text-gold-400">Gallery</a></li>
       </ul>
     </div>
-
     <div>
-      <h4 class="font-semibold text-white mb-4">Charity Status</h4>
-      <p class="text-sm text-white/70 leading-relaxed">Durham Islamic Centre is a registered charity with the Canada Revenue Agency (CRA). All eligible donations are tax-deductible and an official receipt will be issued.</p>
+      <h4 class="text-white font-semibold mb-4">Charity Status</h4>
+      <p class="text-sm leading-relaxed text-ivory-200/70">Durham Islamic Centre is a registered charity with the Canada Revenue Agency (CRA). All eligible donations are tax-deductible and an official receipt will be issued.</p>
     </div>
-
     <div>
-      <h4 class="font-semibold text-white mb-4">Contact Info</h4>
-      <ul class="space-y-2 text-sm text-white/70">
-        <li>4618 Country Lane, Whitby, ON L1P 1V7</li>
+      <h4 class="text-white font-semibold mb-4">Contact</h4>
+      <ul class="space-y-2 text-sm text-ivory-200/70">
+        <li>4618 Country Lane<br />Whitby, ON L1P 1V7</li>
         <li>(289) 312-1421</li>
         <li>info@durhamislamiccentre.ca</li>
       </ul>
-      <div class="flex gap-3 mt-4">
-        <a href="https://facebook.com/durhamislamiccentre.ca" target="_blank" rel="noopener" class="h-9 w-9 rounded-full bg-white/10 hover:bg-amber-500 hover:text-maroon-900 flex items-center justify-center transition">
+      <div class="flex gap-3 mt-5">
+        <a href="https://facebook.com/durhamislamiccentre.ca" target="_blank" rel="noopener" class="h-9 w-9 grid place-items-center border border-white/20 hover:bg-gold-400 hover:text-white hover:border-gold-400 transition" aria-label="Facebook">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
         </a>
-        <a href="https://www.instagram.com/durhamislamiccentre" target="_blank" rel="noopener" class="h-9 w-9 rounded-full bg-white/10 hover:bg-amber-500 hover:text-maroon-900 flex items-center justify-center transition">
+        <a href="https://www.instagram.com/durhamislamiccentre" target="_blank" rel="noopener" class="h-9 w-9 grid place-items-center border border-white/20 hover:bg-gold-400 hover:text-white hover:border-gold-400 transition" aria-label="Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         </a>
       </div>
     </div>
   </div>
-
   <div class="border-t border-white/10 pt-6">
-    <p class="text-center text-sm text-white/60">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+    <p class="text-center text-sm text-ivory-200/50">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- Swiper.js JS (local) -->
-<script src="assets/js/swiper-bundle.min.js"></script>
-<script>
-  // Swiper Hero Slider
-  const heroSwiper = new Swiper('.hero-swiper', {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    effect: 'slide',
-    speed: 800,
-  });
+<!-- MOBILE DOCK -->
+<div class="fixed bottom-0 inset-x-0 z-40 flex gap-2 p-2 pb-[calc(8px+env(safe-area-inset-bottom))] bg-ivory-50/95 backdrop-blur border-t border-forest-900/10 sm:hidden">
+  <a href="#prayers" class="flex-1 text-center py-3 bg-forest-900 text-white font-semibold text-sm">Prayer Times</a>
+  <a href="#donate" class="flex-1 text-center py-3 bg-gold-400 text-white font-semibold text-sm">Donate</a>
+</div>
+<div class="h-16 sm:hidden"></div>
 
-  // Mobile Menu Toggle
+<script>
+  const intro = document.getElementById('introGate');
+  setTimeout(() => intro && intro.classList.add('hide'), 1600);
+
+  const header = document.querySelector('.header-shell');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
   const menuBtn = document.getElementById('menu-btn');
   const closeMenu = document.getElementById('close-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
+  const openMenu = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.remove('hidden'); };
+  const closeMenuFn = () => { mobileMenu.classList.remove('open'); mobileOverlay.classList.add('hidden'); };
+  menuBtn.addEventListener('click', openMenu);
+  closeMenu.addEventListener('click', closeMenuFn);
+  mobileOverlay.addEventListener('click', closeMenuFn);
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => link.addEventListener('click', closeMenuFn));
 
-  function openMobileMenu() {
-    mobileMenu.classList.add('open');
-    mobileOverlay.classList.remove('hidden');
+  const hero = document.querySelector('.hero');
+  const heroYt = document.getElementById('heroYt');
+  if (hero) hero.classList.add('ready');
+  if (heroYt && /^https?:$/.test(location.protocol)) {
+    const sep = heroYt.src.includes('?') ? '&' : '?';
+    heroYt.src += `${sep}origin=${encodeURIComponent(location.origin)}`;
+    const startPlayer = () => {
+      if (!window.YT || !window.YT.Player) return;
+      new YT.Player('heroYt', {
+        events: {
+          onReady(event) {
+            event.target.mute();
+            event.target.playVideo();
+            try { event.target.setPlaybackQuality('hd1080'); } catch (err) {}
+          },
+          onStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) event.target.playVideo();
+            if (event.data === YT.PlayerState.PAUSED) event.target.playVideo();
+          },
+        },
+      });
+    };
+    if (window.YT && window.YT.Player) {
+      startPlayer();
+    } else {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      window.onYouTubeIframeAPIReady = startPlayer;
+      document.head.appendChild(tag);
+    }
   }
-  function closeMobileMenuFn() {
-    mobileMenu.classList.remove('open');
-    mobileOverlay.classList.add('hidden');
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
   }
 
-  menuBtn.addEventListener('click', openMobileMenu);
-  closeMenu.addEventListener('click', closeMobileMenuFn);
-  mobileOverlay.addEventListener('click', closeMobileMenuFn);
-
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', closeMobileMenuFn);
-  });
-
-  // Contact form submit handler (front-end only demo)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       alert('Thank you for reaching out! We will get back to you soon, InshaAllah.');
       contactForm.reset();
     });
   }
 
-  // =============================================
-  // 1. DYNAMIC PRAYER TIMES (Aladhan API)
-  // =============================================
   const PRAYER_LAT = 43.89456;
   const PRAYER_LON = -79.14123;
   const PRAYER_METHOD = 15;
 
-  const PRAYER_ICONS = {
-    Fajr: '🌙',
-    Sunrise: '🌅',
-    Dhuhr: '☀️',
-    Asr: '🌤️',
-    Maghrib: '🌇',
-    Isha: '✨',
-  };
-
   function formatPrayerTime(timeStr) {
-    // Aladhan returns times like "05:32 (EDT)"
-    const cleaned = timeStr.split(' ')[0];
+    const cleaned = String(timeStr).split(' ')[0];
     const [hourStr, minuteStr] = cleaned.split(':');
     const hour = parseInt(hourStr, 10);
     const suffix = hour >= 12 ? 'PM' : 'AM';
@@ -716,47 +896,63 @@
   }
 
   async function fetchPrayerTimes() {
-    const container = document.getElementById('prayer-times-container');
-    const dateEl = document.getElementById('prayer-date');
     const today = new Date();
     const dateParam = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
-
     try {
       const response = await fetch(`https://api.aladhan.com/v1/timings/${dateParam}?latitude=${PRAYER_LAT}&longitude=${PRAYER_LON}&method=${PRAYER_METHOD}`);
       if (!response.ok) throw new Error('Prayer times request failed');
       const data = await response.json();
       const timings = data.data.timings;
+      const names = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 
-      const prayers = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+      names.forEach((name) => {
+        const el = document.querySelector(`[data-full-p="${name}"]`);
+        if (el) el.textContent = formatPrayerTime(timings[name]);
+      });
 
-      container.innerHTML = prayers.map(prayer => `
-        <div class="bg-white rounded-2xl shadow-lg border border-maroon-900/10 p-6 text-center hover:-translate-y-1 transition duration-300">
-          <div class="text-3xl mb-2">${PRAYER_ICONS[prayer]}</div>
-          <p class="font-semibold text-maroon-900 mb-1">${prayer}</p>
-          <p class="text-amber-600 font-bold text-lg">${formatPrayerTime(timings[prayer])}</p>
-        </div>
-      `).join('');
-
+      const dateEl = document.getElementById('fullPrayerDate');
       if (dateEl) {
-        dateEl.textContent = today.toLocaleDateString('en-US', {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-        });
+        dateEl.textContent = today.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       }
+
+      const sequence = names.filter((n) => n !== 'Sunrise').map((name) => {
+        const [h, m] = String(timings[name]).split(' ')[0].split(':').map(Number);
+        const d = new Date();
+        d.setHours(h, m, 0, 0);
+        return { name, date: d };
+      });
+      let next = sequence.find((item) => item.date > today);
+      if (!next) {
+        next = sequence[0];
+        next.date.setDate(next.date.getDate() + 1);
+      }
+      document.getElementById('nextPrayer').textContent = `${next.name} · ${formatPrayerTime(timings[next.name])}`;
+      document.getElementById('prayerNote').textContent = `${data.data.date.readable} · confirm iqamah with the masjid`;
     } catch (error) {
-      console.error('Failed to fetch prayer times:', error);
-      container.innerHTML = `
-        <div class="col-span-2 sm:col-span-3 lg:col-span-6 text-center text-rose-700 bg-white rounded-2xl shadow-lg border border-maroon-900/10 py-10">
-          Unable to load prayer times right now. Please check back later.
-        </div>
-      `;
+      console.error(error);
+      document.getElementById('nextPrayer').textContent = 'See posted schedule';
     }
   }
+  fetchPrayerTimes();
 
-  document.addEventListener('DOMContentLoaded', fetchPrayerTimes);
+  const aboutSlides = [...document.querySelectorAll('.about-slide')];
+  let aboutIndex = 0;
+  let aboutTimer;
+  function showAbout(n) {
+    aboutIndex = (n + aboutSlides.length) % aboutSlides.length;
+    aboutSlides.forEach((slide, i) => slide.style.opacity = i === aboutIndex ? '1' : '0');
+    document.getElementById('aboutTitle').textContent = aboutSlides[aboutIndex].dataset.title;
+    document.getElementById('aboutText').textContent = aboutSlides[aboutIndex].dataset.caption;
+  }
+  function startAbout() {
+    clearInterval(aboutTimer);
+    aboutTimer = setInterval(() => showAbout(aboutIndex + 1), 5200);
+  }
+  document.getElementById('aboutPrev').addEventListener('click', () => { showAbout(aboutIndex - 1); startAbout(); });
+  document.getElementById('aboutNext').addEventListener('click', () => { showAbout(aboutIndex + 1); startAbout(); });
+  showAbout(0);
+  startAbout();
 
-  // =============================================
-  // 3. GALLERY LIGHTBOX
-  // =============================================
   const galleryImages = [
     'assets/images/gallery-1.jpg',
     'assets/images/gallery-2.jpg',
@@ -766,34 +962,27 @@
     'assets/images/gallery-6.jpg',
   ];
   let currentLightboxIndex = 0;
-
   function openLightbox(index) {
     currentLightboxIndex = index;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = galleryImages[currentLightboxIndex];
-    lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
+    document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
+    const box = document.getElementById('lightbox');
+    box.classList.remove('hidden');
+    box.classList.add('flex');
     document.body.classList.add('overflow-hidden');
   }
-
-  function closeLightbox(event) {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.classList.add('hidden');
-    lightbox.classList.remove('flex');
+  function closeLightbox() {
+    const box = document.getElementById('lightbox');
+    box.classList.add('hidden');
+    box.classList.remove('flex');
     document.body.classList.remove('overflow-hidden');
   }
-
   function changeLightboxImage(direction) {
     currentLightboxIndex = (currentLightboxIndex + direction + galleryImages.length) % galleryImages.length;
     document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
   }
-
-  document.addEventListener('keydown', function (e) {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox.classList.contains('hidden')) return;
-
-    if (e.key === 'Escape') closeLightbox(e);
+  document.addEventListener('keydown', (e) => {
+    if (document.getElementById('lightbox').classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') changeLightboxImage(-1);
     if (e.key === 'ArrowRight') changeLightboxImage(1);
   });
