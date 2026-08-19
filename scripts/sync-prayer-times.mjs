@@ -30,13 +30,19 @@ function extractTableDiv(html, index) {
   return end === -1 ? html.slice(start) : html.slice(start, end);
 }
 
-function parseWidget(html) {
-  const tableHtml = extractTableDiv(html, 0);
-  if (!tableHtml) throw new Error('table_div_0 not found');
-  const dateMatch = html.match(/<div class="carousel-item active"[\s\S]*?<h2>([^<]+)<\/h2>\s*<p>([^<]+)<\/p>/);
-  const date = dateMatch ? normalizeTime(dateMatch[1]) : '';
-  const hijri = dateMatch ? normalizeTime(dateMatch[2]) : '';
+function extractTop(html, index) {
+  const match = html.match(new RegExp(`id="top_${index}"[\\s\\S]*?<h2>([^<]+)<\\/h2>\\s*<p>([^<]+)<\\/p>`));
+  return {
+    date: match ? normalizeTime(match[1]) : '',
+    hijri: match ? normalizeTime(match[2]) : '',
+  };
+}
 
+function parseDay(html, index) {
+  const tableHtml = extractTableDiv(html, index);
+  if (!tableHtml) return null;
+
+  const { date, hijri } = extractTop(html, index);
   const timings = {};
   const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
   let row;
@@ -54,6 +60,8 @@ function parseWidget(html) {
     }
   }
 
+  if (!Object.keys(timings).length) return null;
+
   const jumuah = [];
   const jumuahBlock = tableHtml.match(/<ul class="testing-sec">([\s\S]*?)<\/ul>/);
   if (jumuahBlock) {
@@ -67,14 +75,29 @@ function parseWidget(html) {
     }
   }
 
+  return { date, hijri, timings, jumuah };
+}
+
+function parseWidget(html) {
+  const days = [];
+  for (let index = 0; index < 7; index += 1) {
+    const day = parseDay(html, index);
+    if (!day) break;
+    days.push(day);
+  }
+
+  if (!days.length) throw new Error('table_div_0 not found');
+  const today = days[0];
+
   return {
     source: 'masjidal',
     masjid_id: MASJID_ID,
     widget_url: WIDGET_URL,
-    date,
-    hijri,
-    timings,
-    jumuah,
+    date: today.date,
+    hijri: today.hijri,
+    timings: today.timings,
+    jumuah: today.jumuah,
+    days,
     updated_at: new Date().toISOString(),
   };
 }

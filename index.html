@@ -54,10 +54,12 @@
     --ink: #000000;
   }
   html { scroll-behavior: smooth; }
+  html.menu-open, html.menu-open body { overflow: hidden; }
   body {
     font-family: 'Outfit', sans-serif;
     color: var(--ink);
     background: var(--ivory);
+    overflow-x: hidden;
   }
   h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
 
@@ -97,8 +99,59 @@
   }
   .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-  .mobile-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(18, 3, 3, .55);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease;
+  }
+  .mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 70;
+    display: flex;
+    flex-direction: column;
+    width: min(86vw, 22rem);
+    height: 100dvh;
+    height: 100svh;
+    background: #FAF6F5;
+    box-shadow: -18px 0 40px rgba(18, 3, 3, .16);
+    transform: translateX(110%);
+    transition: transform .35s cubic-bezier(.22,1,.36,1);
+    padding: calc(18px + env(safe-area-inset-top)) 1.35rem calc(88px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .mobile-drawer.open { transform: translateX(0); }
+  .mobile-nav-link {
+    display: block;
+    padding: .85rem 0;
+    border-bottom: 1px solid rgba(152,33,28,.1);
+    color: #98211C;
+  }
+  .mobile-nav-donate {
+    display: block;
+    margin-top: 1.1rem;
+    text-align: center;
+    background: #A74641;
+    color: #fff;
+    font-weight: 600;
+    padding: .9rem 1rem;
+    border-bottom: 0;
+  }
+  @media (min-width: 1280px) {
+    .mobile-overlay, .mobile-drawer { display: none; }
+  }
 
   .frame-gold {
     box-shadow:
@@ -262,6 +315,7 @@
   }
 
   .header-shell { transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
+  .header-shell nav img { display: block; }
   .header-shell.scrolled {
     background: rgba(250,246,245,.94);
     backdrop-filter: blur(16px);
@@ -344,6 +398,35 @@
     opacity: 1;
   }
 
+  .prayer-nav {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    flex-shrink: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(152,33,28,.22);
+    background: #fff;
+    color: #98211C;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .25s ease, color .25s ease, opacity .25s ease, border-color .25s ease;
+  }
+  .prayer-nav svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+  .prayer-nav:hover:not(:disabled) {
+    background: #98211C;
+    color: #fff;
+    border-color: #98211C;
+  }
+  .prayer-nav:disabled {
+    opacity: .32;
+    cursor: not-allowed;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -397,23 +480,25 @@
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
 
-    <div class="flex items-center gap-3">
-      <a href="#donate" class="hidden sm:inline-flex items-center bg-gold-400 hover:bg-gold-500 text-white font-semibold text-sm px-5 py-2.5 transition">Donate Now</a>
-      <button id="menu-btn" class="xl:hidden text-forest-900 p-1" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <a href="#donate" class="hidden sm:inline-flex items-center bg-gold-400 hover:bg-gold-500 text-white font-semibold text-sm px-4 sm:px-5 py-2.5 transition">Donate Now</a>
+      <button id="menu-btn" class="xl:hidden inline-flex items-center justify-center h-11 w-11 text-forest-900" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </nav>
+</header>
 
-  <div id="mobile-overlay" class="fixed inset-0 bg-forest-950/50 z-40 hidden xl:hidden"></div>
-  <div id="mobile-menu" class="mobile-drawer fixed top-0 right-0 z-50 h-full w-[82%] max-w-sm bg-ivory-50 shadow-2xl xl:hidden p-7 overflow-y-auto">
-    <div class="flex justify-between items-center mb-10">
-      <p class="font-display text-2xl text-forest-900">Menu</p>
-      <button id="close-menu" aria-label="Close menu" class="text-forest-900">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <ul class="flex flex-col gap-5 text-forest-800 font-medium text-lg">
+<div id="mobile-overlay" class="mobile-overlay" hidden></div>
+<aside id="mobile-menu" class="mobile-drawer" aria-hidden="true" aria-label="Site menu">
+  <div class="flex justify-between items-center mb-6">
+    <p class="font-display text-2xl text-forest-900">Menu</p>
+    <button id="close-menu" type="button" aria-label="Close menu" class="inline-flex items-center justify-center h-11 w-11 -mr-2 text-forest-900">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav>
+    <ul class="flex flex-col text-forest-800 font-medium text-base">
       <li><a href="#home" class="mobile-nav-link">Home</a></li>
       <li><a href="#prayers" class="mobile-nav-link">Prayer Times</a></li>
       <li><a href="#about" class="mobile-nav-link">About</a></li>
@@ -423,10 +508,10 @@
       <li><a href="#leadership" class="mobile-nav-link">Leadership</a></li>
       <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
       <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-      <li><a href="#donate" class="mobile-nav-link mt-2 inline-block bg-gold-400 text-white px-5 py-3 text-center font-semibold">Donate Now</a></li>
+      <li><a href="#donate" class="mobile-nav-link mobile-nav-donate">Donate Now</a></li>
     </ul>
-  </div>
-</header>
+  </nav>
+</aside>
 
 <!-- HERO -->
 <section id="home" class="hero relative min-h-[88vh] flex items-end overflow-hidden bg-forest-950">
@@ -473,8 +558,22 @@
       <p class="ornament justify-center text-gold-600 mb-3">Salah Schedule</p>
       <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Daily Prayer Timings</h2>
       <p class="mt-4 max-w-2xl mx-auto text-slate-600">Iqamah timings for Iqra Masjid, Whitby — synced from the official Masjidal schedule.</p>
-      <p id="fullPrayerDate" class="mt-4 font-semibold text-forest-800">Loading today’s date…</p>
-      <p id="fullPrayerHijri" class="mt-1 text-sm text-slate-500"></p>
+      <div class="mt-6 flex items-center justify-center gap-2 sm:gap-5 w-full max-w-md mx-auto">
+        <button id="prayerPrev" type="button" class="prayer-nav" aria-label="Previous day" disabled>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10.25 3.25 5.75 8l4.5 4.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="min-w-0 flex-1 px-1" aria-live="polite">
+          <p id="fullPrayerDate" class="font-semibold text-forest-800 text-[15px] sm:text-base leading-snug">Loading today’s date…</p>
+          <p id="fullPrayerHijri" class="mt-1 text-sm text-slate-500"></p>
+        </div>
+        <button id="prayerNext" type="button" class="prayer-nav" aria-label="Next day" disabled>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M5.75 3.25 10.25 8l-4.5 4.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
@@ -1007,8 +1106,9 @@
       </div>
     </div>
   </div>
-  <div class="border-t border-white/10 pt-6">
-    <p class="text-center text-sm text-ivory-200/50">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+  <div class="max-w-7xl mx-auto px-4 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-ivory-200/50">
+    <p class="text-center sm:text-left">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+    <p class="text-center sm:text-right">Designed and managed by <a href="https://cynerra.ca/" target="_blank" rel="noopener noreferrer" class="text-ivory-200/80 hover:text-gold-400 transition">Cynerra Technologies</a></p>
   </div>
 </footer>
 
@@ -1017,7 +1117,7 @@
   <a href="#prayers" class="flex-1 text-center py-3 bg-forest-900 text-white font-semibold text-sm">Prayer Times</a>
   <a href="#donate" class="flex-1 text-center py-3 bg-gold-400 text-white font-semibold text-sm">Donate</a>
 </div>
-<div class="h-16 sm:hidden"></div>
+<div class="h-[calc(4.75rem+env(safe-area-inset-bottom))] sm:hidden"></div>
 
 <script>
   const intro = document.getElementById('introGate');
@@ -1030,12 +1130,29 @@
   const closeMenu = document.getElementById('close-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
-  const openMenu = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.remove('hidden'); };
-  const closeMenuFn = () => { mobileMenu.classList.remove('open'); mobileOverlay.classList.add('hidden'); };
+  const openMenu = () => {
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    mobileOverlay.hidden = false;
+    document.documentElement.classList.add('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  };
+  const closeMenuFn = () => {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    document.documentElement.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    window.setTimeout(() => { if (!mobileOverlay.classList.contains('open')) mobileOverlay.hidden = true; }, 300);
+  };
   menuBtn.addEventListener('click', openMenu);
   closeMenu.addEventListener('click', closeMenuFn);
   mobileOverlay.addEventListener('click', closeMenuFn);
   document.querySelectorAll('.mobile-nav-link').forEach((link) => link.addEventListener('click', closeMenuFn));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenuFn();
+  });
 
   const hero = document.querySelector('.hero');
   const heroYt = document.getElementById('heroYt');
@@ -1174,6 +1291,9 @@
     '/api/prayer-times.php',
     'assets/data/prayer-times.json',
   ];
+  const PRAYER_MAX_DAYS = 7;
+  let prayerDays = [];
+  let prayerDayIndex = 0;
 
   function parseTimeToDate(timeStr, baseDate = new Date()) {
     const match = String(timeStr).trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
@@ -1188,18 +1308,50 @@
     return date;
   }
 
-  function renderPrayerData(data) {
+  function startOfDay(value = new Date()) {
+    const date = new Date(value);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+
+  function parseScheduleDate(dateStr) {
+    if (!dateStr) return null;
+    const parsed = Date.parse(dateStr);
+    if (Number.isNaN(parsed)) return null;
+    return startOfDay(parsed);
+  }
+
+  function collectPrayerDays(data) {
+    const days = Array.isArray(data.days) && data.days.length
+      ? data.days
+      : [{ date: data.date, hijri: data.hijri, timings: data.timings, jumuah: data.jumuah }];
+    const today = startOfDay();
+    const upcoming = days.filter((day) => {
+      const date = parseScheduleDate(day.date);
+      return !date || date >= today;
+    });
+    return (upcoming.length ? upcoming : days).slice(0, PRAYER_MAX_DAYS);
+  }
+
+  function updatePrayerNav() {
+    const prev = document.getElementById('prayerPrev');
+    const next = document.getElementById('prayerNext');
+    if (prev) prev.disabled = prayerDayIndex <= 0;
+    if (next) next.disabled = prayerDayIndex >= prayerDays.length - 1;
+  }
+
+  function renderPrayerCards(data) {
     PRAYER_NAMES.forEach((name) => {
       const entry = data.timings?.[name];
       const iqamahEl = document.querySelector(`[data-full-p="${name}"]`);
       const startsEl = document.querySelector(`[data-full-p-starts="${name}"]`);
-      if (!entry || !iqamahEl) return;
+      if (!iqamahEl) return;
 
-      const iqamah = entry.iqamah || entry.starts || '--:--';
-      const starts = entry.starts || iqamah;
+      const iqamah = entry?.iqamah || entry?.starts || '--:--';
+      const starts = entry?.starts || iqamah;
       iqamahEl.textContent = iqamah;
 
-      if (startsEl && name !== 'Sunrise' && starts !== iqamah) {
+      if (startsEl && name !== 'Sunrise' && entry && starts !== iqamah) {
         startsEl.textContent = `Adhan: ${starts}`;
         startsEl.classList.remove('hidden');
       } else if (startsEl) {
@@ -1209,7 +1361,7 @@
     });
 
     const dateEl = document.getElementById('fullPrayerDate');
-    if (dateEl && data.date) dateEl.textContent = data.date;
+    if (dateEl) dateEl.textContent = data.date || 'Date unavailable';
 
     const hijriEl = document.getElementById('fullPrayerHijri');
     if (hijriEl) hijriEl.textContent = data.hijri || '';
@@ -1222,7 +1374,9 @@
         return `<div class="flex flex-col sm:flex-row sm:justify-between gap-1${border}"><strong>${label}</strong><span class="text-slate-500">Iqamah: ${item.time}</span></div>`;
       }).join('');
     }
+  }
 
+  function renderHeroNextPrayer(data) {
     const now = new Date();
     const sequence = PRAYER_NAMES.filter((n) => n !== 'Sunrise').map((name) => {
       const time = data.timings?.[name]?.iqamah || data.timings?.[name]?.starts;
@@ -1241,6 +1395,20 @@
     if (noteEl) noteEl.textContent = data.hijri ? `${data.hijri} · Masjidal schedule` : 'Masjidal schedule';
   }
 
+  function showPrayerDay(index) {
+    if (!prayerDays.length) return;
+    prayerDayIndex = Math.max(0, Math.min(index, prayerDays.length - 1));
+    renderPrayerCards(prayerDays[prayerDayIndex]);
+    updatePrayerNav();
+  }
+
+  function bindPrayerNav() {
+    const prev = document.getElementById('prayerPrev');
+    const next = document.getElementById('prayerNext');
+    if (prev) prev.addEventListener('click', () => showPrayerDay(prayerDayIndex - 1));
+    if (next) next.addEventListener('click', () => showPrayerDay(prayerDayIndex + 1));
+  }
+
   async function fetchPrayerTimes() {
     for (const source of PRAYER_SOURCES) {
       try {
@@ -1248,7 +1416,9 @@
         if (!response.ok) continue;
         const data = await response.json();
         if (data.error || !data.timings) continue;
-        renderPrayerData(data);
+        prayerDays = collectPrayerDays(data);
+        renderHeroNextPrayer(prayerDays[0] || data);
+        showPrayerDay(0);
         return;
       } catch (error) {
         console.warn(`Prayer source failed (${source})`, error);
@@ -1258,6 +1428,7 @@
     document.getElementById('nextPrayer').textContent = 'See posted schedule';
     document.getElementById('prayerNote').textContent = 'Unable to load Masjidal timings';
   }
+  bindPrayerNav();
   fetchPrayerTimes();
 
   const aboutSlides = [...document.querySelectorAll('.about-slide')];

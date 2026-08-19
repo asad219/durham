@@ -28,13 +28,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background: #FAF6F5; color: #000000; }
+  html.menu-open, html.menu-open body { overflow: hidden; }
+  body { font-family: 'Outfit', sans-serif; background: #FAF6F5; color: #000000; overflow-x: hidden; }
   h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
   .nav-link { position: relative; }
   .nav-link::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1.5px; background: #A74641; transition: width .3s; }
   .nav-link:hover::after { width: 100%; }
-  .mobile-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  .mobile-overlay {
+    position: fixed; inset: 0; z-index: 60; background: rgba(18, 3, 3, .55);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease;
+  }
+  .mobile-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+  .mobile-drawer {
+    position: fixed; top: 0; right: 0; z-index: 70;
+    display: flex; flex-direction: column;
+    width: min(86vw, 22rem); height: 100dvh; height: 100svh;
+    background: #FAF6F5; box-shadow: -18px 0 40px rgba(18, 3, 3, .16);
+    transform: translateX(110%); transition: transform .35s cubic-bezier(.22,1,.36,1);
+    padding: calc(18px + env(safe-area-inset-top)) 1.35rem calc(24px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
   .mobile-drawer.open { transform: translateX(0); }
+  .mobile-nav-link { display: block; padding: .85rem 0; border-bottom: 1px solid rgba(152,33,28,.1); color: #98211C; }
+  @media (min-width: 1024px) {
+    .mobile-overlay, .mobile-drawer { display: none; }
+  }
 </style>
 </head>
 <body class="bg-ivory-50 text-slate-900 antialiased">
@@ -57,27 +76,34 @@
       <li><a href="../#journey" class="nav-link">Our Journey</a></li>
       <li><a href="../#contact" class="nav-link">Contact</a></li>
     </ul>
-    <div class="flex items-center gap-3">
-      <a href="../#donate" class="hidden sm:inline-flex bg-gold-400 hover:bg-gold-500 text-white font-semibold px-5 py-2.5">Donate Now</a>
-      <button id="menu-btn" class="lg:hidden text-forest-900" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <a href="../#donate" class="hidden sm:inline-flex bg-gold-400 hover:bg-gold-500 text-white font-semibold px-4 sm:px-5 py-2.5">Donate Now</a>
+      <button id="menu-btn" class="lg:hidden inline-flex items-center justify-center h-11 w-11 text-forest-900" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </nav>
-  <div id="mobile-overlay" class="fixed inset-0 bg-forest-950/50 z-40 hidden lg:hidden"></div>
-  <div id="mobile-menu" class="mobile-drawer fixed top-0 right-0 z-50 h-full w-72 bg-ivory-50 shadow-2xl lg:hidden p-6">
-    <div class="flex justify-between items-center mb-8">
-      <p class="font-display text-2xl text-forest-900">Menu</p>
-      <button id="close-menu" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg></button>
-    </div>
-    <ul class="flex flex-col gap-5 font-medium text-forest-800">
+</header>
+
+<div id="mobile-overlay" class="mobile-overlay" hidden></div>
+<aside id="mobile-menu" class="mobile-drawer" aria-hidden="true" aria-label="Site menu">
+  <div class="flex justify-between items-center mb-6">
+    <p class="font-display text-2xl text-forest-900">Menu</p>
+    <button id="close-menu" type="button" aria-label="Close menu" class="inline-flex items-center justify-center h-11 w-11 -mr-2 text-forest-900">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav>
+    <ul class="flex flex-col font-medium text-forest-800">
       <li><a href="../#home" class="mobile-nav-link">Home</a></li>
       <li><a href="../#prayers" class="mobile-nav-link">Prayer Times</a></li>
+      <li><a href="../#about" class="mobile-nav-link">About</a></li>
+      <li><a href="../#programs" class="mobile-nav-link">Programs</a></li>
       <li><a href="../#journey" class="mobile-nav-link">Our Journey</a></li>
       <li><a href="../#contact" class="mobile-nav-link">Contact</a></li>
     </ul>
-  </div>
-</header>
+  </nav>
+</aside>
 
 <section class="relative h-72 sm:h-96 overflow-hidden">
   <img src="../assets/images/gallery-6.jpg" alt="Give Shelter Homes" class="w-full h-full object-cover" />
@@ -112,7 +138,10 @@
 <footer class="bg-forest-950 text-ivory-50 pt-14 pb-8">
   <div class="max-w-7xl mx-auto px-4 text-sm text-ivory-50/70">
     <p class="mb-6">A CRA registered charity serving Whitby and surrounding areas since 2012.</p>
-    <p class="border-t border-white/10 pt-6 text-center text-ivory-50/50">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-ivory-50/50">
+      <p class="text-center sm:text-left">&copy; 2026 Durham Islamic Centre. All rights reserved.</p>
+      <p class="text-center sm:text-right">Designed and managed by <a href="https://cynerra.ca/" target="_blank" rel="noopener noreferrer" class="text-ivory-50/80 hover:text-gold-400 transition">Cynerra Technologies</a></p>
+    </div>
   </div>
 </footer>
 
@@ -121,12 +150,29 @@
   const closeMenu = document.getElementById('close-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
-  const openMenu = () => { mobileMenu.classList.add('open'); mobileOverlay.classList.remove('hidden'); };
-  const closeMenuFn = () => { mobileMenu.classList.remove('open'); mobileOverlay.classList.add('hidden'); };
+  const openMenu = () => {
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    mobileOverlay.hidden = false;
+    document.documentElement.classList.add('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  };
+  const closeMenuFn = () => {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    document.documentElement.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    window.setTimeout(() => { if (!mobileOverlay.classList.contains('open')) mobileOverlay.hidden = true; }, 300);
+  };
   menuBtn.addEventListener('click', openMenu);
   closeMenu.addEventListener('click', closeMenuFn);
   mobileOverlay.addEventListener('click', closeMenuFn);
   document.querySelectorAll('.mobile-nav-link').forEach((link) => link.addEventListener('click', closeMenuFn));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenuFn();
+  });
 </script>
 </body>
 </html>
