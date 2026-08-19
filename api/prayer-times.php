@@ -51,22 +51,15 @@ function fetchWidgetHtml(): ?string
     return $html === false ? null : $html;
 }
 
-function parsePrayerWidget(string $html): array
+function parsePrayerDay(DOMXPath $xpath, int $index): ?array
 {
-    libxml_use_internal_errors(true);
-    $dom = new DOMDocument();
-    if (!$dom->loadHTML($html)) {
-        throw new RuntimeException('Unable to parse Masjidal widget HTML.');
-    }
-
-    $xpath = new DOMXPath($dom);
-    $tableDiv = $xpath->query('//*[@id="table_div_0"]')->item(0);
+    $tableDiv = $xpath->query('//*[@id="table_div_' . $index . '"]')->item(0);
     if (!$tableDiv instanceof DOMElement) {
-        throw new RuntimeException('Today\'s prayer table was not found.');
+        return null;
     }
 
-    $dateNode = $xpath->query('//*[@id="top_0"]//h2')->item(0);
-    $hijriNode = $xpath->query('//*[@id="top_0"]//p')->item(0);
+    $dateNode = $xpath->query('//*[@id="top_' . $index . '"]//h2')->item(0);
+    $hijriNode = $xpath->query('//*[@id="top_' . $index . '"]//p')->item(0);
     $date = $dateNode ? normalizeTime($dateNode->textContent) : '';
     $hijri = $hijriNode ? normalizeTime($hijriNode->textContent) : '';
 
@@ -122,17 +115,50 @@ function parsePrayerWidget(string $html): array
     }
 
     if ($timings === []) {
+        return null;
+    }
+
+    return [
+        'date' => $date,
+        'hijri' => $hijri,
+        'timings' => $timings,
+        'jumuah' => $jumuah,
+    ];
+}
+
+function parsePrayerWidget(string $html): array
+{
+    libxml_use_internal_errors(true);
+    $dom = new DOMDocument();
+    if (!$dom->loadHTML($html)) {
+        throw new RuntimeException('Unable to parse Masjidal widget HTML.');
+    }
+
+    $xpath = new DOMXPath($dom);
+    $days = [];
+    for ($index = 0; $index < 7; $index++) {
+        $day = parsePrayerDay($xpath, $index);
+        if ($day === null) {
+            break;
+        }
+        $days[] = $day;
+    }
+
+    if ($days === []) {
         throw new RuntimeException('No prayer rows were parsed from Masjidal.');
     }
+
+    $today = $days[0];
 
     return [
         'source' => 'masjidal',
         'masjid_id' => MASJID_ID,
         'widget_url' => WIDGET_URL,
-        'date' => $date,
-        'hijri' => $hijri,
-        'timings' => $timings,
-        'jumuah' => $jumuah,
+        'date' => $today['date'],
+        'hijri' => $today['hijri'],
+        'timings' => $today['timings'],
+        'jumuah' => $today['jumuah'],
+        'days' => $days,
         'updated_at' => gmdate('c'),
     ];
 }

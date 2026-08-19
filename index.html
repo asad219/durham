@@ -344,6 +344,35 @@
     opacity: 1;
   }
 
+  .prayer-nav {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    flex-shrink: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(152,33,28,.22);
+    background: #fff;
+    color: #98211C;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .25s ease, color .25s ease, opacity .25s ease, border-color .25s ease;
+  }
+  .prayer-nav svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+  .prayer-nav:hover:not(:disabled) {
+    background: #98211C;
+    color: #fff;
+    border-color: #98211C;
+  }
+  .prayer-nav:disabled {
+    opacity: .32;
+    cursor: not-allowed;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -473,8 +502,22 @@
       <p class="ornament justify-center text-gold-600 mb-3">Salah Schedule</p>
       <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Daily Prayer Timings</h2>
       <p class="mt-4 max-w-2xl mx-auto text-slate-600">Iqamah timings for Iqra Masjid, Whitby — synced from the official Masjidal schedule.</p>
-      <p id="fullPrayerDate" class="mt-4 font-semibold text-forest-800">Loading today’s date…</p>
-      <p id="fullPrayerHijri" class="mt-1 text-sm text-slate-500"></p>
+      <div class="mt-6 flex items-center justify-center gap-3 sm:gap-5">
+        <button id="prayerPrev" type="button" class="prayer-nav" aria-label="Previous day" disabled>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10.25 3.25 5.75 8l4.5 4.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="min-w-[12.5rem] sm:min-w-[16.5rem]" aria-live="polite">
+          <p id="fullPrayerDate" class="font-semibold text-forest-800">Loading today’s date…</p>
+          <p id="fullPrayerHijri" class="mt-1 text-sm text-slate-500"></p>
+        </div>
+        <button id="prayerNext" type="button" class="prayer-nav" aria-label="Next day" disabled>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M5.75 3.25 10.25 8l-4.5 4.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
@@ -1174,6 +1217,9 @@
     '/api/prayer-times.php',
     'assets/data/prayer-times.json',
   ];
+  const PRAYER_MAX_DAYS = 7;
+  let prayerDays = [];
+  let prayerDayIndex = 0;
 
   function parseTimeToDate(timeStr, baseDate = new Date()) {
     const match = String(timeStr).trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
@@ -1188,18 +1234,50 @@
     return date;
   }
 
-  function renderPrayerData(data) {
+  function startOfDay(value = new Date()) {
+    const date = new Date(value);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+
+  function parseScheduleDate(dateStr) {
+    if (!dateStr) return null;
+    const parsed = Date.parse(dateStr);
+    if (Number.isNaN(parsed)) return null;
+    return startOfDay(parsed);
+  }
+
+  function collectPrayerDays(data) {
+    const days = Array.isArray(data.days) && data.days.length
+      ? data.days
+      : [{ date: data.date, hijri: data.hijri, timings: data.timings, jumuah: data.jumuah }];
+    const today = startOfDay();
+    const upcoming = days.filter((day) => {
+      const date = parseScheduleDate(day.date);
+      return !date || date >= today;
+    });
+    return (upcoming.length ? upcoming : days).slice(0, PRAYER_MAX_DAYS);
+  }
+
+  function updatePrayerNav() {
+    const prev = document.getElementById('prayerPrev');
+    const next = document.getElementById('prayerNext');
+    if (prev) prev.disabled = prayerDayIndex <= 0;
+    if (next) next.disabled = prayerDayIndex >= prayerDays.length - 1;
+  }
+
+  function renderPrayerCards(data) {
     PRAYER_NAMES.forEach((name) => {
       const entry = data.timings?.[name];
       const iqamahEl = document.querySelector(`[data-full-p="${name}"]`);
       const startsEl = document.querySelector(`[data-full-p-starts="${name}"]`);
-      if (!entry || !iqamahEl) return;
+      if (!iqamahEl) return;
 
-      const iqamah = entry.iqamah || entry.starts || '--:--';
-      const starts = entry.starts || iqamah;
+      const iqamah = entry?.iqamah || entry?.starts || '--:--';
+      const starts = entry?.starts || iqamah;
       iqamahEl.textContent = iqamah;
 
-      if (startsEl && name !== 'Sunrise' && starts !== iqamah) {
+      if (startsEl && name !== 'Sunrise' && entry && starts !== iqamah) {
         startsEl.textContent = `Adhan: ${starts}`;
         startsEl.classList.remove('hidden');
       } else if (startsEl) {
@@ -1209,7 +1287,7 @@
     });
 
     const dateEl = document.getElementById('fullPrayerDate');
-    if (dateEl && data.date) dateEl.textContent = data.date;
+    if (dateEl) dateEl.textContent = data.date || 'Date unavailable';
 
     const hijriEl = document.getElementById('fullPrayerHijri');
     if (hijriEl) hijriEl.textContent = data.hijri || '';
@@ -1222,7 +1300,9 @@
         return `<div class="flex flex-col sm:flex-row sm:justify-between gap-1${border}"><strong>${label}</strong><span class="text-slate-500">Iqamah: ${item.time}</span></div>`;
       }).join('');
     }
+  }
 
+  function renderHeroNextPrayer(data) {
     const now = new Date();
     const sequence = PRAYER_NAMES.filter((n) => n !== 'Sunrise').map((name) => {
       const time = data.timings?.[name]?.iqamah || data.timings?.[name]?.starts;
@@ -1241,6 +1321,20 @@
     if (noteEl) noteEl.textContent = data.hijri ? `${data.hijri} · Masjidal schedule` : 'Masjidal schedule';
   }
 
+  function showPrayerDay(index) {
+    if (!prayerDays.length) return;
+    prayerDayIndex = Math.max(0, Math.min(index, prayerDays.length - 1));
+    renderPrayerCards(prayerDays[prayerDayIndex]);
+    updatePrayerNav();
+  }
+
+  function bindPrayerNav() {
+    const prev = document.getElementById('prayerPrev');
+    const next = document.getElementById('prayerNext');
+    if (prev) prev.addEventListener('click', () => showPrayerDay(prayerDayIndex - 1));
+    if (next) next.addEventListener('click', () => showPrayerDay(prayerDayIndex + 1));
+  }
+
   async function fetchPrayerTimes() {
     for (const source of PRAYER_SOURCES) {
       try {
@@ -1248,7 +1342,9 @@
         if (!response.ok) continue;
         const data = await response.json();
         if (data.error || !data.timings) continue;
-        renderPrayerData(data);
+        prayerDays = collectPrayerDays(data);
+        renderHeroNextPrayer(prayerDays[0] || data);
+        showPrayerDay(0);
         return;
       } catch (error) {
         console.warn(`Prayer source failed (${source})`, error);
@@ -1258,6 +1354,7 @@
     document.getElementById('nextPrayer').textContent = 'See posted schedule';
     document.getElementById('prayerNote').textContent = 'Unable to load Masjidal timings';
   }
+  bindPrayerNav();
   fetchPrayerTimes();
 
   const aboutSlides = [...document.querySelectorAll('.about-slide')];
