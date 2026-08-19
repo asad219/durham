@@ -309,8 +309,10 @@
   }
   .intro-gate.hide { opacity: 0; visibility: hidden; pointer-events: none; }
   .intro-arabic {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 5vw, 52px);
+    display: block;
+    width: min(92vw, 820px);
+    height: auto;
+    margin-inline: auto;
     animation: rise 1.1s cubic-bezier(.22,1,.36,1) both;
   }
   @keyframes rise {
@@ -447,7 +449,7 @@
 <!-- INTRO -->
 <div class="intro-gate" id="introGate" aria-hidden="true">
   <div class="text-center px-6">
-    <p class="intro-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <img class="intro-arabic" src="assets/images/Bismillah.png" alt="بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" />
     <p class="mt-4 text-[11px] tracking-[0.28em] uppercase text-gold-400 font-semibold">Durham Islamic Centre · Iqra Masjid</p>
   </div>
 </div>
@@ -1063,7 +1065,7 @@
         <p class="text-slate-600 mb-3">Send your donation directly via Interac e-Transfer to:</p>
         <p class="font-semibold text-lg bg-ivory-100 px-4 py-3 break-all">Donation@durhamislamiccentre.ca</p>
         <p class="text-slate-500 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
-        <a href="mailto:Donation@durhamislamiccentre.ca" class="mt-auto pt-6 inline-flex justify-center bg-gold-400 hover:bg-gold-500 text-white font-semibold px-6 py-3 transition">Donate Now</a>
+        <a href="mailto:Donation@durhamislamiccentre.ca" class="mt-auto w-full inline-flex items-center justify-center text-center bg-gold-400 hover:bg-gold-500 text-white font-semibold py-3.5 transition">Donate Now</a>
       </div>
     </div>
   </div>
