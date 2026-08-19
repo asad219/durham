@@ -472,8 +472,9 @@
     <div class="text-center reveal mb-14">
       <p class="ornament justify-center text-gold-600 mb-3">Salah Schedule</p>
       <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-900">Daily Prayer Timings</h2>
-      <p class="mt-4 max-w-2xl mx-auto text-slate-600">Live timings for Whitby, ON — updated automatically each day. Please confirm with the mosque for exact daily adjustments.</p>
+      <p class="mt-4 max-w-2xl mx-auto text-slate-600">Iqamah timings for Iqra Masjid, Whitby — synced from the official Masjidal schedule.</p>
       <p id="fullPrayerDate" class="mt-4 font-semibold text-forest-800">Loading today’s date…</p>
+      <p id="fullPrayerHijri" class="mt-1 text-sm text-slate-500"></p>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
@@ -481,31 +482,37 @@
         <span class="block text-2xl mb-2">🌙</span>
         <strong class="block text-forest-900 text-sm">Fajr</strong>
         <b data-full-p="Fajr" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Fajr" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
       <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌅</span>
         <strong class="block text-forest-900 text-sm">Sunrise</strong>
         <b data-full-p="Sunrise" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Sunrise" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
       <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">☀️</span>
         <strong class="block text-forest-900 text-sm">Dhuhr</strong>
         <b data-full-p="Dhuhr" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Dhuhr" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
       <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌤️</span>
         <strong class="block text-forest-900 text-sm">Asr</strong>
         <b data-full-p="Asr" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Asr" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
       <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">🌆</span>
         <strong class="block text-forest-900 text-sm">Maghrib</strong>
         <b data-full-p="Maghrib" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Maghrib" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
       <div class="bg-white border border-forest-900/10 px-3 py-6 text-center shadow-sm">
         <span class="block text-2xl mb-2">✨</span>
         <strong class="block text-forest-900 text-sm">Isha</strong>
         <b data-full-p="Isha" class="block mt-2 text-gold-600 text-lg">--:--</b>
+        <span data-full-p-starts="Isha" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
     </div>
 
@@ -513,10 +520,10 @@
       <article class="bg-white border border-forest-900/10 p-7 sm:p-8 shadow-sm">
         <h3 class="font-display text-3xl text-forest-900">Iqra Masjid</h3>
         <p class="text-gold-600 text-sm font-medium mb-5">Jumu’ah Salah Timings</p>
-        <div class="space-y-4 text-sm sm:text-base">
-          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>1st Jummah</strong><span class="text-slate-500">Bayan: 12:30 PM · Iqamah: 1:00 PM</span></div>
-          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>2nd Jummah</strong><span class="text-slate-500">Bayan: 1:30 PM · Iqamah: 2:00 PM</span></div>
-          <div class="flex flex-col sm:flex-row sm:justify-between gap-1"><strong>3rd Jummah</strong><span class="text-slate-500">Bayan: 3:40 PM · Iqamah: 4:00 PM</span></div>
+        <div id="iqra-jummah-list" class="space-y-4 text-sm sm:text-base">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>1st Jummah</strong><span class="text-slate-500">Loading…</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-ivory-200 pb-3"><strong>2nd Jummah</strong><span class="text-slate-500">Loading…</span></div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1"><strong>3rd Jummah</strong><span class="text-slate-500">Loading…</span></div>
         </div>
       </article>
       <article class="bg-white border border-forest-900/10 p-7 sm:p-8 shadow-sm">
@@ -1162,56 +1169,94 @@
     });
   }
 
-  const PRAYER_LAT = 43.89456;
-  const PRAYER_LON = -79.14123;
-  const PRAYER_METHOD = 15;
+  const PRAYER_NAMES = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+  const PRAYER_SOURCES = [
+    '/api/prayer-times.php',
+    'assets/data/prayer-times.json',
+  ];
 
-  function formatPrayerTime(timeStr) {
-    const cleaned = String(timeStr).split(' ')[0];
-    const [hourStr, minuteStr] = cleaned.split(':');
-    const hour = parseInt(hourStr, 10);
-    const suffix = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour % 12 === 0 ? 12 : hour % 12;
-    return `${displayHour}:${minuteStr} ${suffix}`;
+  function parseTimeToDate(timeStr, baseDate = new Date()) {
+    const match = String(timeStr).trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!match) return null;
+    let hour = parseInt(match[1], 10);
+    const minute = parseInt(match[2], 10);
+    const suffix = match[3].toUpperCase();
+    if (suffix === 'PM' && hour !== 12) hour += 12;
+    if (suffix === 'AM' && hour === 12) hour = 0;
+    const date = new Date(baseDate);
+    date.setHours(hour, minute, 0, 0);
+    return date;
+  }
+
+  function renderPrayerData(data) {
+    PRAYER_NAMES.forEach((name) => {
+      const entry = data.timings?.[name];
+      const iqamahEl = document.querySelector(`[data-full-p="${name}"]`);
+      const startsEl = document.querySelector(`[data-full-p-starts="${name}"]`);
+      if (!entry || !iqamahEl) return;
+
+      const iqamah = entry.iqamah || entry.starts || '--:--';
+      const starts = entry.starts || iqamah;
+      iqamahEl.textContent = iqamah;
+
+      if (startsEl && name !== 'Sunrise' && starts !== iqamah) {
+        startsEl.textContent = `Adhan: ${starts}`;
+        startsEl.classList.remove('hidden');
+      } else if (startsEl) {
+        startsEl.textContent = '';
+        startsEl.classList.add('hidden');
+      }
+    });
+
+    const dateEl = document.getElementById('fullPrayerDate');
+    if (dateEl && data.date) dateEl.textContent = data.date;
+
+    const hijriEl = document.getElementById('fullPrayerHijri');
+    if (hijriEl) hijriEl.textContent = data.hijri || '';
+
+    const jumuahList = document.getElementById('iqra-jummah-list');
+    if (jumuahList && Array.isArray(data.jumuah) && data.jumuah.length) {
+      jumuahList.innerHTML = data.jumuah.map((item, index) => {
+        const border = index < data.jumuah.length - 1 ? ' border-b border-ivory-200 pb-3' : '';
+        const label = item.label || `Jumuah ${index + 1}`;
+        return `<div class="flex flex-col sm:flex-row sm:justify-between gap-1${border}"><strong>${label}</strong><span class="text-slate-500">Iqamah: ${item.time}</span></div>`;
+      }).join('');
+    }
+
+    const now = new Date();
+    const sequence = PRAYER_NAMES.filter((n) => n !== 'Sunrise').map((name) => {
+      const time = data.timings?.[name]?.iqamah || data.timings?.[name]?.starts;
+      return { name, date: parseTimeToDate(time, now), display: time };
+    }).filter((item) => item.date);
+
+    let next = sequence.find((item) => item.date > now);
+    if (!next && sequence.length) {
+      next = { ...sequence[0] };
+      next.date.setDate(next.date.getDate() + 1);
+    }
+
+    const nextEl = document.getElementById('nextPrayer');
+    const noteEl = document.getElementById('prayerNote');
+    if (next && nextEl) nextEl.textContent = `${next.name} · ${next.display}`;
+    if (noteEl) noteEl.textContent = data.hijri ? `${data.hijri} · Masjidal schedule` : 'Masjidal schedule';
   }
 
   async function fetchPrayerTimes() {
-    const today = new Date();
-    const dateParam = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
-    try {
-      const response = await fetch(`https://api.aladhan.com/v1/timings/${dateParam}?latitude=${PRAYER_LAT}&longitude=${PRAYER_LON}&method=${PRAYER_METHOD}`);
-      if (!response.ok) throw new Error('Prayer times request failed');
-      const data = await response.json();
-      const timings = data.data.timings;
-      const names = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-
-      names.forEach((name) => {
-        const el = document.querySelector(`[data-full-p="${name}"]`);
-        if (el) el.textContent = formatPrayerTime(timings[name]);
-      });
-
-      const dateEl = document.getElementById('fullPrayerDate');
-      if (dateEl) {
-        dateEl.textContent = today.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    for (const source of PRAYER_SOURCES) {
+      try {
+        const response = await fetch(source, { cache: 'no-store' });
+        if (!response.ok) continue;
+        const data = await response.json();
+        if (data.error || !data.timings) continue;
+        renderPrayerData(data);
+        return;
+      } catch (error) {
+        console.warn(`Prayer source failed (${source})`, error);
       }
-
-      const sequence = names.filter((n) => n !== 'Sunrise').map((name) => {
-        const [h, m] = String(timings[name]).split(' ')[0].split(':').map(Number);
-        const d = new Date();
-        d.setHours(h, m, 0, 0);
-        return { name, date: d };
-      });
-      let next = sequence.find((item) => item.date > today);
-      if (!next) {
-        next = sequence[0];
-        next.date.setDate(next.date.getDate() + 1);
-      }
-      document.getElementById('nextPrayer').textContent = `${next.name} · ${formatPrayerTime(timings[next.name])}`;
-      document.getElementById('prayerNote').textContent = `${data.data.date.readable} · confirm iqamah with the masjid`;
-    } catch (error) {
-      console.error(error);
-      document.getElementById('nextPrayer').textContent = 'See posted schedule';
     }
+
+    document.getElementById('nextPrayer').textContent = 'See posted schedule';
+    document.getElementById('prayerNote').textContent = 'Unable to load Masjidal timings';
   }
   fetchPrayerTimes();
 

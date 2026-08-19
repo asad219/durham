@@ -1,0 +1,48 @@
+{
+  "source": "masjidal",
+  "masjid_id": "5AvP54KX",
+  "widget_url": "https://timing.athanplus.com/masjid/widgets/embed?theme=1&masjid_id=5AvP54KX",
+  "date": "Wednesday, Aug 19, 2026",
+  "hijri": "Rabi Al-Awwal 6, 1448",
+  "timings": {
+    "Fajr": {
+      "starts": "4:56 AM",
+      "iqamah": "5:45 AM"
+    },
+    "Sunrise": {
+      "starts": "6:25 AM",
+      "iqamah": "6:25 AM"
+    },
+    "Dhuhr": {
+      "starts": "1:20 PM",
+      "iqamah": "2:00 PM"
+    },
+    "Asr": {
+      "starts": "6:11 PM",
+      "iqamah": "7:00 PM"
+    },
+    "Maghrib": {
+      "starts": "8:16 PM",
+      "iqamah": "8:16 PM"
+    },
+    "Isha": {
+      "starts": "9:42 PM",
+      "iqamah": "10:15 PM"
+    }
+  },
+  "jumuah": [
+    {
+      "time": "2:00 PM",
+      "label": "Jumuah 1"
+    },
+    {
+      "time": "3:00 PM",
+      "label": "Jumuah 2"
+    },
+    {
+      "time": "4:00 PM",
+      "label": "Jumuah 3"
+    }
+  ],
+  "updated_at": "2026-08-19T15:33:15.796Z"
+}
