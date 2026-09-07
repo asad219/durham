@@ -899,47 +899,47 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-[4/5] md:aspect-square" onclick="openLightbox(0)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl col-span-2 aspect-[2/1] md:aspect-[2/1]" onclick="openLightbox(0)">
+        <img src="assets/gallery/15.jpeg" alt="Iqra Masjid building exterior" class="w-full h-full object-cover" loading="lazy" />
+      </button>
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(1)">
         <img src="assets/gallery/1.jpeg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(1)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(2)">
         <img src="assets/gallery/2.jpeg" alt="Durham Islamic Centre grounds" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(2)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(3)">
         <img src="assets/gallery/3.jpeg" alt="Masjid entrance and progress" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(3)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(4)">
         <img src="assets/gallery/4.jpeg" alt="Iqra Masjid prayer hall" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(4)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(5)">
         <img src="assets/gallery/5.jpeg" alt="Community gathering" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(5)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(6)">
         <img src="assets/gallery/6.jpeg" alt="Building our home together" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(6)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(7)">
         <img src="assets/gallery/7.jpeg" alt="Durham Islamic Centre community" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(7)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(8)">
         <img src="assets/gallery/8.jpeg" alt="Iqra Masjid" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(8)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(9)">
         <img src="assets/gallery/10.jpeg" alt="Community moments" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(9)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(10)">
         <img src="assets/gallery/11.jpeg" alt="Faith and fellowship" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(10)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(11)">
         <img src="assets/gallery/12.jpeg" alt="Durham Islamic Centre" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square md:col-span-2 md:aspect-[2/1]" onclick="openLightbox(11)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(12)">
         <img src="assets/gallery/13.jpeg" alt="Serving our community" class="w-full h-full object-cover" loading="lazy" />
       </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl aspect-square" onclick="openLightbox(12)">
+      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl col-span-2 md:col-span-1 aspect-[2/1] md:aspect-square" onclick="openLightbox(13)">
         <img src="assets/gallery/14.jpeg" alt="Together in Whitby" class="w-full h-full object-cover" loading="lazy" />
-      </button>
-      <button type="button" class="gallery-tile relative overflow-hidden rounded-2xl col-span-2 md:col-span-3 aspect-[16/7]" onclick="openLightbox(13)">
-        <img src="assets/gallery/15.jpeg" alt="Building our home together" class="w-full h-full object-cover" loading="lazy" />
       </button>
     </div>
   </div>
@@ -1470,6 +1470,7 @@
   startAbout();
 
   const galleryItems = [
+    { src: 'assets/gallery/15.jpeg', caption: 'Iqra Masjid building exterior' },
     { src: 'assets/gallery/1.jpeg', caption: 'Durham Islamic Centre community' },
     { src: 'assets/gallery/2.jpeg', caption: 'Durham Islamic Centre grounds' },
     { src: 'assets/gallery/3.jpeg', caption: 'Masjid entrance and progress' },
@@ -1483,7 +1484,6 @@
     { src: 'assets/gallery/12.jpeg', caption: 'Durham Islamic Centre' },
     { src: 'assets/gallery/13.jpeg', caption: 'Serving our community' },
     { src: 'assets/gallery/14.jpeg', caption: 'Together in Whitby' },
-    { src: 'assets/gallery/15.jpeg', caption: 'Building our home together' },
   ];
   let currentLightboxIndex = 0;
   let lightboxBusy = false;
