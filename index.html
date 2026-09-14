@@ -487,7 +487,7 @@
     </ul>
 
     <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-      <a href="#donate" class="hidden sm:inline-flex items-center bg-gold-400 hover:bg-gold-500 text-white font-semibold text-sm px-4 sm:px-5 py-2.5 transition">Donate Now</a>
+      <a href="https://app.irm.io/durhamislamiccentre.ca" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center bg-gold-400 hover:bg-gold-500 text-white font-semibold text-sm px-4 sm:px-5 py-2.5 transition">Donate Now</a>
       <button id="menu-btn" class="xl:hidden inline-flex items-center justify-center h-11 w-11 text-forest-900" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -514,7 +514,7 @@
       <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
       <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       <li><a href="#leadership" class="mobile-nav-link">Leadership</a></li>
-      <li><a href="#donate" class="mobile-nav-link mobile-nav-donate">Donate Now</a></li>
+      <li><a href="https://app.irm.io/durhamislamiccentre.ca" target="_blank" rel="noopener" class="mobile-nav-link mobile-nav-donate">Donate Now</a></li>
     </ul>
   </nav>
 </aside>
@@ -546,13 +546,29 @@
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="#prayers" class="inline-flex items-center justify-center min-h-[50px] px-7 bg-gold-400 hover:bg-gold-500 text-white font-semibold transition">View Prayer Times</a>
-      <a href="#donate" class="inline-flex items-center justify-center min-h-[50px] px-7 border border-ivory-100/70 text-white hover:bg-white hover:text-forest-900 font-semibold transition">Support the Masjid</a>
+      <a href="https://app.irm.io/durhamislamiccentre.ca" target="_blank" rel="noopener" class="inline-flex items-center justify-center min-h-[50px] px-7 border border-ivory-100/70 text-white hover:bg-white hover:text-forest-900 font-semibold transition">Support the Masjid</a>
     </div>
 
     <div class="mt-12 max-w-sm bg-ivory-50/95 backdrop-blur border border-gold-400/40 p-5">
-      <p class="text-[11px] uppercase tracking-[0.22em] text-gold-600 font-semibold">Next Prayer</p>
-      <p id="nextPrayer" class="font-display text-3xl text-forest-900 mt-1">Loading…</p>
-      <p id="prayerNote" class="text-sm text-slate-500 mt-1">Whitby, Ontario</p>
+      <div class="flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-gold-600 font-semibold">Next Prayer</p>
+          <p id="nextPrayer" class="font-display text-3xl text-forest-900 mt-1">Loading…</p>
+          <p id="prayerNote" class="text-sm text-slate-500 mt-1">Whitby, Ontario</p>
+        </div>
+        <a
+          href="https://broadcast.azaanbox.com/embed/durham-islamic-centre"
+          target="_blank"
+          rel="noopener"
+          class="shrink-0 mt-0.5 inline-flex items-center justify-center w-11 h-11 rounded-full bg-forest-900 text-white hover:bg-forest-800 hover:text-white transition shadow-sm"
+          aria-label="Listen to live masjid audio"
+          title="Live masjid audio"
+        >
+          <svg viewBox="0 0 24 24" class="w-5 h-5 translate-x-[1px]" fill="currentColor" aria-hidden="true">
+            <path d="M9 6.5v11l8.5-5.5L9 6.5z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -620,6 +636,22 @@
         <span data-full-p-starts="Isha" class="hidden text-xs text-slate-400 mt-1"></span>
       </div>
     </div>
+
+    <a
+      href="https://broadcast.azaanbox.com/embed/durham-islamic-centre"
+      target="_blank"
+      rel="noopener"
+      class="group mb-14 flex items-center justify-center gap-3 sm:gap-4 w-full bg-forest-900 hover:bg-forest-800 text-white px-5 py-4 sm:py-5 shadow-sm transition"
+      aria-label="Click for Live Audio Streaming"
+    >
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white group-hover:bg-white/15 transition shrink-0">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 translate-x-[1px]" fill="currentColor" aria-hidden="true">
+          <path d="M9 6.5v11l8.5-5.5L9 6.5z"/>
+        </svg>
+      </span>
+      <span class="font-display text-xl sm:text-2xl tracking-wide">Click for Live Audio Streaming</span>
+      <span class="hidden sm:inline text-gold-400 text-sm font-semibold uppercase tracking-[0.16em]">Listen live →</span>
+    </a>
 
     <div class="grid md:grid-cols-2 gap-6">
       <article class="bg-white border border-forest-900/10 p-7 sm:p-8 shadow-sm">
@@ -842,12 +874,6 @@
     <div class="grid lg:grid-cols-2 gap-10 items-center mb-16">
       <div>
         <p class="text-ivory-100/90 leading-relaxed text-lg">We're in the final stretch, the finish line is just around the bend. Since purchasing the property in 2017, we've been working hard to get this masjid ready for the community. We are almost there! We have to get the parking, septic and fire hydrant done before we get an occupancy permit from the town and we need your help.</p>
-        <div class="flex flex-wrap gap-3 mt-7 text-sm">
-          <span class="bg-white/10 border border-white/10 px-4 py-2">🅿️ Parking Lot</span>
-          <span class="bg-white/10 border border-white/10 px-4 py-2">🚿 Septic System</span>
-          <span class="bg-white/10 border border-white/10 px-4 py-2">🚒 Fire Hydrant</span>
-          <span class="bg-white/10 border border-white/10 px-4 py-2">💡 Entrance Lighting</span>
-        </div>
       </div>
       <img src="assets/images/campaign-recurring.png" alt="Durham Islamic Centre Answer the Call of Allah campaign poster" class="w-full max-w-md lg:max-w-none mx-auto shadow-2xl border border-gold-400/30" />
     </div>
@@ -985,7 +1011,7 @@
         <h3 class="font-display text-3xl text-forest-900 mb-2">Join Our WhatsApp Group</h3>
         <p class="text-slate-600 mb-5">Stay connected with community updates, programs and important announcements.</p>
         <a href="https://chat.whatsapp.com/77SDABOhIpE8pA3n49bSR5" target="_blank" rel="noopener">
-          <img src="assets/images/whatsapp-qr.jpg" alt="QR code for the Durham Islamic Centre WhatsApp group" class="w-56 h-56 mx-auto object-cover border-4 border-forest-800 bg-white p-2" />
+          <img src="assets/images/whatsapp-qr.png" alt="QR code for the Durham Islamic Centre WhatsApp group" class="w-56 h-56 mx-auto object-contain border-4 border-forest-800 bg-white p-2" />
         </a>
         <p class="mt-3 font-medium text-forest-900">Scan the QR code with your phone</p>
         <a href="https://chat.whatsapp.com/77SDABOhIpE8pA3n49bSR5" target="_blank" rel="noopener" class="mt-5 inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold px-6 py-3 transition">Open WhatsApp Group</a>
@@ -1039,23 +1065,8 @@
       </div>
     </div>
 
-    <div class="mb-8">
-      <div class="flex items-end justify-between gap-4 mb-4">
-        <h3 class="font-display text-3xl text-forest-900">Masjid Location</h3>
-        <a href="https://www.google.com/maps/search/?api=1&query=4618+Country+Lane+Whitby+ON+L1P+1V7" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600">Open larger map →</a>
-      </div>
-      <iframe
-        title="Google Map showing Durham Islamic Centre at 4618 Country Lane, Whitby"
-        src="https://www.google.com/maps?q=4618%20Country%20Lane%2C%20Whitby%2C%20ON%20L1P%201V7&z=15&output=embed"
-        class="w-full h-[360px] sm:h-[430px] border-0 shadow-lg"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-6 items-stretch">
-      <form id="contact-form" class="bg-white border border-forest-900/10 p-8 space-y-5">
+    <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+      <form id="contact-form" class="bg-white border border-forest-900/10 p-8 space-y-5 h-full">
         <h3 class="font-display text-3xl text-forest-900">Send a message</h3>
         <div>
           <label for="name" class="block text-sm font-medium mb-1">Name</label>
@@ -1072,12 +1083,19 @@
         <button type="submit" class="w-full bg-forest-900 hover:bg-forest-800 text-white font-semibold py-3.5 transition">Submit Message</button>
       </form>
 
-      <div id="donate" class="bg-white border border-forest-900/10 p-8 flex flex-col scroll-mt-28">
-        <h3 class="font-display text-3xl text-forest-900 mb-4">E-Transfer</h3>
-        <p class="text-slate-600 mb-3">Send your donation directly via Interac e-Transfer to:</p>
-        <p class="font-semibold text-lg bg-ivory-100 px-4 py-3 break-all">donation@durhamislamiccentre.ca</p>
-        <p class="text-slate-500 text-sm mt-4">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
-        <a href="mailto:donation@durhamislamiccentre.ca" class="mt-auto w-full inline-flex items-center justify-center text-center bg-gold-400 hover:bg-gold-500 text-white font-semibold py-3.5 transition">Donate Now</a>
+      <div class="flex flex-col min-h-0">
+        <div class="flex items-end justify-between gap-4 mb-4">
+          <h3 class="font-display text-3xl text-forest-900">Masjid Location</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=4618+Country+Lane+Whitby+ON+L1P+1V7" target="_blank" rel="noopener" class="text-forest-800 font-semibold hover:text-gold-600 text-sm sm:text-base shrink-0">Open larger map →</a>
+        </div>
+        <iframe
+          title="Google Map showing Durham Islamic Centre at 4618 Country Lane, Whitby"
+          src="https://www.google.com/maps?q=4618%20Country%20Lane%2C%20Whitby%2C%20ON%20L1P%201V7&z=15&output=embed"
+          class="w-full flex-1 min-h-[360px] lg:min-h-0 border-0 shadow-lg"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
@@ -1105,9 +1123,13 @@
         <li><a href="#leadership" class="hover:text-gold-400">Leadership</a></li>
       </ul>
     </div>
-    <div>
+    <div id="donate" class="scroll-mt-28">
       <h4 class="text-white font-semibold mb-4">Charity Status</h4>
-      <p class="text-sm leading-relaxed text-ivory-200/70">Durham Islamic Centre is a registered charity with the Canada Revenue Agency (CRA). All eligible donations are tax-deductible and an official receipt will be issued.</p>
+      <p class="text-sm leading-relaxed text-ivory-200/70 mb-6">Durham Islamic Centre is a registered charity with the Canada Revenue Agency (CRA). All eligible donations are tax-deductible and an official receipt will be issued.</p>
+      <h4 class="text-white font-semibold mb-2">E-Transfer</h4>
+      <p class="text-sm text-ivory-200/70 mb-2">Send your donation directly via Interac e-Transfer to:</p>
+      <p class="text-sm font-semibold text-white bg-white/10 px-3 py-2 break-all mb-2">donation@durhamislamiccentre.ca</p>
+      <p class="text-xs leading-relaxed text-ivory-200/60">All donations are tax-deductible. A charitable receipt will be issued for eligible donations.</p>
     </div>
     <div>
       <h4 class="text-white font-semibold mb-4">Contact</h4>
