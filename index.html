@@ -1330,7 +1330,7 @@
 
   const PRAYER_NAMES = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
   const PRAYER_SOURCES = [
-    '/api/prayer-times.php',
+    'api/prayer-times.php',
     'assets/data/prayer-times.json',
   ];
   const PRAYER_MAX_DAYS = 7;
@@ -1372,7 +1372,7 @@
       const date = parseScheduleDate(day.date);
       return !date || date >= today;
     });
-    return (upcoming.length ? upcoming : days).slice(0, PRAYER_MAX_DAYS);
+    return upcoming.slice(0, PRAYER_MAX_DAYS);
   }
 
   function updatePrayerNav() {
@@ -1458,8 +1458,10 @@
         if (!response.ok) continue;
         const data = await response.json();
         if (data.error || !data.timings) continue;
-        prayerDays = collectPrayerDays(data);
-        renderHeroNextPrayer(prayerDays[0] || data);
+        const days = collectPrayerDays(data);
+        if (!days.length) continue;
+        prayerDays = days;
+        renderHeroNextPrayer(prayerDays[0]);
         showPrayerDay(0);
         return;
       } catch (error) {

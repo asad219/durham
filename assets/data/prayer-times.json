@@ -1,358 +1,358 @@
 {
-  "source": "masjidal",
-  "masjid_id": "5AvP54KX",
-  "widget_url": "https://timing.athanplus.com/masjid/widgets/embed?theme=1&masjid_id=5AvP54KX",
-  "date": "Wednesday, Aug 19, 2026",
-  "hijri": "Rabi Al-Awwal 6, 1448",
-  "timings": {
-    "Fajr": {
-      "starts": "4:56 AM",
-      "iqamah": "5:45 AM"
-    },
-    "Sunrise": {
-      "starts": "6:25 AM",
-      "iqamah": "6:25 AM"
-    },
-    "Dhuhr": {
-      "starts": "1:20 PM",
-      "iqamah": "2:00 PM"
-    },
-    "Asr": {
-      "starts": "6:11 PM",
-      "iqamah": "7:00 PM"
-    },
-    "Maghrib": {
-      "starts": "8:16 PM",
-      "iqamah": "8:16 PM"
-    },
-    "Isha": {
-      "starts": "9:42 PM",
-      "iqamah": "10:15 PM"
-    }
-  },
-  "jumuah": [
-    {
-      "time": "2:00 PM",
-      "label": "Jumuah 1"
-    },
-    {
-      "time": "3:00 PM",
-      "label": "Jumuah 2"
-    },
-    {
-      "time": "4:00 PM",
-      "label": "Jumuah 3"
-    }
-  ],
-  "days": [
-    {
-      "date": "Wednesday, Aug 19, 2026",
-      "hijri": "Rabi Al-Awwal 6, 1448",
-      "timings": {
+    "source": "masjidal",
+    "masjid_id": "5AvP54KX",
+    "widget_url": "https://timing.athanplus.com/masjid/widgets/embed?theme=1&masjid_id=5AvP54KX",
+    "date": "Thursday, Oct 1, 2026",
+    "hijri": "Rabi Al-Thani 20, 1448",
+    "timings": {
         "Fajr": {
-          "starts": "4:56 AM",
-          "iqamah": "5:45 AM"
+            "starts": "5:55 AM",
+            "iqamah": "6:30 AM"
         },
         "Sunrise": {
-          "starts": "6:25 AM",
-          "iqamah": "6:25 AM"
+            "starts": "7:14 AM",
+            "iqamah": "7:14 AM"
         },
         "Dhuhr": {
-          "starts": "1:20 PM",
-          "iqamah": "2:00 PM"
+            "starts": "1:06 PM",
+            "iqamah": "2:00 PM"
         },
         "Asr": {
-          "starts": "6:11 PM",
-          "iqamah": "7:00 PM"
+            "starts": "5:09 PM",
+            "iqamah": "5:30 PM"
         },
         "Maghrib": {
-          "starts": "8:16 PM",
-          "iqamah": "8:16 PM"
+            "starts": "6:59 PM",
+            "iqamah": "6:59 PM"
         },
         "Isha": {
-          "starts": "9:42 PM",
-          "iqamah": "10:15 PM"
+            "starts": "8:16 PM",
+            "iqamah": "8:30 PM"
         }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
     },
-    {
-      "date": "Thursday, Aug 20, 2026",
-      "hijri": "Rabi Al-Awwal 7, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "4:58 AM",
-          "iqamah": "5:45 AM"
+    "jumuah": [
+        {
+            "label": "Jumuah 1",
+            "time": "2:00 PM"
         },
-        "Sunrise": {
-          "starts": "6:26 AM",
-          "iqamah": "6:26 AM"
+        {
+            "label": "Jumuah 2",
+            "time": "2:45 PM"
         },
-        "Dhuhr": {
-          "starts": "1:19 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:10 PM",
-          "iqamah": "7:00 PM"
-        },
-        "Maghrib": {
-          "starts": "8:14 PM",
-          "iqamah": "8:14 PM"
-        },
-        "Isha": {
-          "starts": "9:40 PM",
-          "iqamah": "10:15 PM"
+        {
+            "label": "Jumuah 3",
+            "time": "3:30 PM"
         }
-      },
-      "jumuah": [
+    ],
+    "days": [
         {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
+            "date": "Thursday, Oct 1, 2026",
+            "hijri": "Rabi Al-Thani 20, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "5:55 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:14 AM",
+                    "iqamah": "7:14 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:06 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:09 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:59 PM",
+                    "iqamah": "6:59 PM"
+                },
+                "Isha": {
+                    "starts": "8:16 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
         },
         {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
+            "date": "Friday, Oct 2, 2026",
+            "hijri": "Rabi Al-Thani 21, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "5:56 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:15 AM",
+                    "iqamah": "7:15 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:05 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:08 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:57 PM",
+                    "iqamah": "6:57 PM"
+                },
+                "Isha": {
+                    "starts": "8:14 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
         },
         {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
+            "date": "Saturday, Oct 3, 2026",
+            "hijri": "Rabi Al-Thani 22, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "5:57 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:16 AM",
+                    "iqamah": "7:16 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:05 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:06 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:55 PM",
+                    "iqamah": "6:55 PM"
+                },
+                "Isha": {
+                    "starts": "8:12 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
+        },
+        {
+            "date": "Sunday, Oct 4, 2026",
+            "hijri": "Rabi Al-Thani 23, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "5:58 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:17 AM",
+                    "iqamah": "7:17 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:05 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:04 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:53 PM",
+                    "iqamah": "6:53 PM"
+                },
+                "Isha": {
+                    "starts": "8:10 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
+        },
+        {
+            "date": "Monday, Oct 5, 2026",
+            "hijri": "Rabi Al-Thani 24, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "5:59 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:18 AM",
+                    "iqamah": "7:18 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:04 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:03 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:51 PM",
+                    "iqamah": "6:51 PM"
+                },
+                "Isha": {
+                    "starts": "8:08 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
+        },
+        {
+            "date": "Tuesday, Oct 6, 2026",
+            "hijri": "Rabi Al-Thani 25, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "6:01 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:20 AM",
+                    "iqamah": "7:20 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:04 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:01 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:50 PM",
+                    "iqamah": "6:50 PM"
+                },
+                "Isha": {
+                    "starts": "8:06 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
+        },
+        {
+            "date": "Wednesday, Oct 7, 2026",
+            "hijri": "Rabi Al-Thani 26, 1448",
+            "timings": {
+                "Fajr": {
+                    "starts": "6:02 AM",
+                    "iqamah": "6:30 AM"
+                },
+                "Sunrise": {
+                    "starts": "7:21 AM",
+                    "iqamah": "7:21 AM"
+                },
+                "Dhuhr": {
+                    "starts": "1:04 PM",
+                    "iqamah": "2:00 PM"
+                },
+                "Asr": {
+                    "starts": "5:00 PM",
+                    "iqamah": "5:30 PM"
+                },
+                "Maghrib": {
+                    "starts": "6:48 PM",
+                    "iqamah": "6:48 PM"
+                },
+                "Isha": {
+                    "starts": "8:05 PM",
+                    "iqamah": "8:30 PM"
+                }
+            },
+            "jumuah": [
+                {
+                    "label": "Jumuah 1",
+                    "time": "2:00 PM"
+                },
+                {
+                    "label": "Jumuah 2",
+                    "time": "2:45 PM"
+                },
+                {
+                    "label": "Jumuah 3",
+                    "time": "3:30 PM"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "date": "Friday, Aug 21, 2026",
-      "hijri": "Rabi Al-Awwal 8, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "4:59 AM",
-          "iqamah": "5:45 AM"
-        },
-        "Sunrise": {
-          "starts": "6:27 AM",
-          "iqamah": "6:27 AM"
-        },
-        "Dhuhr": {
-          "starts": "1:19 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:09 PM",
-          "iqamah": "6:30 PM"
-        },
-        "Maghrib": {
-          "starts": "8:12 PM",
-          "iqamah": "8:12 PM"
-        },
-        "Isha": {
-          "starts": "9:38 PM",
-          "iqamah": "9:45 PM"
-        }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
-    },
-    {
-      "date": "Saturday, Aug 22, 2026",
-      "hijri": "Rabi Al-Awwal 9, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "5:01 AM",
-          "iqamah": "5:45 AM"
-        },
-        "Sunrise": {
-          "starts": "6:28 AM",
-          "iqamah": "6:28 AM"
-        },
-        "Dhuhr": {
-          "starts": "1:19 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:08 PM",
-          "iqamah": "6:30 PM"
-        },
-        "Maghrib": {
-          "starts": "8:11 PM",
-          "iqamah": "8:11 PM"
-        },
-        "Isha": {
-          "starts": "9:36 PM",
-          "iqamah": "9:45 PM"
-        }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
-    },
-    {
-      "date": "Sunday, Aug 23, 2026",
-      "hijri": "Rabi Al-Awwal 10, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "5:02 AM",
-          "iqamah": "5:45 AM"
-        },
-        "Sunrise": {
-          "starts": "6:29 AM",
-          "iqamah": "6:29 AM"
-        },
-        "Dhuhr": {
-          "starts": "1:19 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:06 PM",
-          "iqamah": "6:30 PM"
-        },
-        "Maghrib": {
-          "starts": "8:09 PM",
-          "iqamah": "8:09 PM"
-        },
-        "Isha": {
-          "starts": "9:34 PM",
-          "iqamah": "9:45 PM"
-        }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
-    },
-    {
-      "date": "Monday, Aug 24, 2026",
-      "hijri": "Rabi Al-Awwal 11, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "5:04 AM",
-          "iqamah": "5:45 AM"
-        },
-        "Sunrise": {
-          "starts": "6:30 AM",
-          "iqamah": "6:30 AM"
-        },
-        "Dhuhr": {
-          "starts": "1:18 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:05 PM",
-          "iqamah": "6:30 PM"
-        },
-        "Maghrib": {
-          "starts": "8:07 PM",
-          "iqamah": "8:07 PM"
-        },
-        "Isha": {
-          "starts": "9:32 PM",
-          "iqamah": "9:45 PM"
-        }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
-    },
-    {
-      "date": "Tuesday, Aug 25, 2026",
-      "hijri": "Rabi Al-Awwal 12, 1448",
-      "timings": {
-        "Fajr": {
-          "starts": "5:05 AM",
-          "iqamah": "5:45 AM"
-        },
-        "Sunrise": {
-          "starts": "6:31 AM",
-          "iqamah": "6:31 AM"
-        },
-        "Dhuhr": {
-          "starts": "1:18 PM",
-          "iqamah": "2:00 PM"
-        },
-        "Asr": {
-          "starts": "6:04 PM",
-          "iqamah": "6:30 PM"
-        },
-        "Maghrib": {
-          "starts": "8:06 PM",
-          "iqamah": "8:06 PM"
-        },
-        "Isha": {
-          "starts": "9:30 PM",
-          "iqamah": "9:45 PM"
-        }
-      },
-      "jumuah": [
-        {
-          "time": "2:00 PM",
-          "label": "Jumuah 1"
-        },
-        {
-          "time": "3:00 PM",
-          "label": "Jumuah 2"
-        },
-        {
-          "time": "4:00 PM",
-          "label": "Jumuah 3"
-        }
-      ]
-    }
-  ],
-  "updated_at": "2026-08-19T15:44:54.778Z"
+    ],
+    "updated_at": "2026-10-01T18:20:20+00:00"
 }
